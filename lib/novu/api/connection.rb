@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "pry"
 module Novu
   class Api
     module Connection
@@ -16,6 +15,10 @@ module Novu
         request :put, path, options
       end
 
+      def patch(path, options = {})
+        request :patch, path, options
+      end
+
       def delete(path, options = {})
         request :delete, path, options
       end
@@ -24,7 +27,7 @@ module Novu
 
       def request(http_method, path, options)
         response = self.class.send(http_method, path, { body: options })
-        data = response.parsed_response
+        response.parsed_response
       end
     end
   end
