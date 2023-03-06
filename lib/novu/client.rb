@@ -2,6 +2,7 @@
 
 require "novu/api/changes"
 require "novu/api/connection"
+require "novu/api/environments"
 require "novu/api/events"
 require "novu/api/integrations"
 require "novu/api/layouts"
@@ -16,6 +17,7 @@ module Novu
     include HTTParty
     include Novu::Api::Changes
     include Novu::Api::Connection
+    include Novu::Api::Environments
     include Novu::Api::Events
     include Novu::Api::Integrations
     include Novu::Api::Layouts
