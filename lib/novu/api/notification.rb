@@ -3,16 +3,16 @@
 module Novu
   class Api
     module Notification
-      def notifications(options = {})
-        get("/notifications", options)
+      def notifications(query = {})
+        get("/notifications", query: query)
       end
       
-      def notifications_stats(options = {})
-        get("/notifications/stats", options)
+      def notifications_stats(query = {})
+        get("/notifications/stats", query: query)
       end
 
-      def notifications_graph_stats(options = {})
-        get("/notifications/graph/stats", options)
+      def notifications_graph_stats(query = {})
+        get("/notifications/graph/stats", query: query)
       end
 
       def notification(notification_id)
