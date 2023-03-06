@@ -21,7 +21,7 @@ module Novu
     module Layouts
       def create_layout(body)
         post("/layouts", body)
-      endc
+      end
 
       def layouts(options = {})
         get("/layouts", options)
