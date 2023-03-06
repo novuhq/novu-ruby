@@ -15,7 +15,7 @@ module Novu
         get("/integrations/active")
       end
 
-      def get_webhook_provider_status(provider_id)
+      def webhook_provider_status(provider_id)
         get("/integrations/webhook/provider/#{provider_id}/status")
       end
 
@@ -27,11 +27,11 @@ module Novu
         delete("/integrations/#{integration_id}")
       end
 
-      def get_channel_limit(channel_type)
+      def channel_limit(channel_type)
         get("/integrations/#{channel_type}/limit")
       end
 
-      def get_in_app_status
+      def in_app_status
         get("/integrations/in-app/status")
       end
     end

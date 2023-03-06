@@ -4,6 +4,7 @@ require "novu/api/notification"
 require "novu/api/connection"
 require "novu/api/events"
 require "novu/api/integrations"
+require "novu/api/layouts"
 require "novu/api/subscribers"
 require "novu/api/topics"
 
@@ -13,6 +14,7 @@ module Novu
     include Novu::Api::Connection
     include Novu::Api::Events
     include Novu::Api::Integrations
+    include Novu::Api::Layouts
     include Novu::Api::Notification
     include Novu::Api::Subscribers
     include Novu::Api::Topics
