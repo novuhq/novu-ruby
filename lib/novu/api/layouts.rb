@@ -20,11 +20,11 @@ module Novu
   class Api
     module Layouts
       def create_layout(body)
-        post("/layouts", body)
+        post("/layouts", body: body)
       end
 
-      def layouts(options = {})
-        get("/layouts", options)
+      def layouts(query = {})
+        get("/layouts", query: query)
       end
 
       def layout(layout_id)
@@ -36,7 +36,7 @@ module Novu
       end
 
       def update_layout(layout_id, body)
-        patch("/layouts/#{layout_id}", body)
+        patch("/layouts/#{layout_id}", body: body)
       end
 
       def make_default_layout(layout_id)

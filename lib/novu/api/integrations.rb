@@ -3,12 +3,12 @@
 module Novu
   class Api
     module Integrations
-      def integrations(options = {})
-        get("/integrations", options)
+      def integrations(query = {})
+        get("/integrations", query: query)
       end
 
       def create_integration(body)
-        post("/integrations", body)
+        post("/integrations", body: body)
       end
 
       def active_integrations
@@ -20,7 +20,7 @@ module Novu
       end
 
       def update_integration(integration_id, body)
-        put("/integrations/#{integration_id}", body)
+        put("/integrations/#{integration_id}", body: body)
       end
 
       def delete_integration(integration_id)
