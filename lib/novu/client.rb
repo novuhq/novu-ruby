@@ -4,8 +4,12 @@ require "novu/api/changes"
 require "novu/api/connection"
 require "novu/api/environments"
 require "novu/api/events"
+require "novu/api/execution_details"
+require "novu/api/feeds"
+require "novu/api/inbound_parse"
 require "novu/api/integrations"
 require "novu/api/layouts"
+require "novu/api/messages"
 require "novu/api/notification_groups"
 require "novu/api/notification_templates"
 require "novu/api/notification"
@@ -19,8 +23,12 @@ module Novu
     include Novu::Api::Connection
     include Novu::Api::Environments
     include Novu::Api::Events
+    include Novu::Api::ExecutionDetails
+    include Novu::Api::Feeds
+    include Novu::Api::InboundParse
     include Novu::Api::Integrations
     include Novu::Api::Layouts
+    include Novu::Api::Messages
     include Novu::Api::NotificationGroups
     include Novu::Api::NotificationTemplates
     include Novu::Api::Notification
