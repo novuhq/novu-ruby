@@ -3,8 +3,8 @@
 module Novu
   class Api
     module NotificationTemplates
-      def notification_templates(options = {})
-        get("/notification-templates", query: options)
+      def notification_templates(query = {})
+        get("/notification-templates", query: query)
       end
 
       def create_notification_template(body)
