@@ -9,6 +9,8 @@ Client library for talking to [Novu API](https://api.novu.co/api).
 First of all, initialize client:
 
 ```ruby
+bundle exec irb
+require "./lib/novu.rb"
 client = Novu::Client.new("MY_API_TOKEN")
 ```
 
