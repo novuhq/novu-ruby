@@ -26,7 +26,7 @@ module Novu
       private
 
       def request(http_method, path, options)
-        response = self.class.send(http_method, path, { body: options })
+        response = self.class.send(http_method, path, options)
         response.parsed_response
       end
     end
