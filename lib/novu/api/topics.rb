@@ -7,8 +7,8 @@ module Novu
         post("/topics", body: body)
       end
 
-      def topics(options = {})
-        get("/topics", query: options)
+      def topics(query = {})
+        get("/topics", query: query)
       end
 
       def add_subscribers(topic_key, body)
