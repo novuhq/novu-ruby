@@ -1,18 +1,22 @@
 # frozen_string_literal: true
 
-require "pry"
 require "novu/api/notification"
 require "novu/api/connection"
 require "novu/api/events"
+require "novu/api/integrations"
 require "novu/api/subscribers"
+require "novu/api/topics"
 
 module Novu
   class Client
     include HTTParty
     include Novu::Api::Connection
     include Novu::Api::Events
+    include Novu::Api::Integrations
     include Novu::Api::Notification
     include Novu::Api::Subscribers
+    include Novu::Api::Topics
+
 
     base_uri "https://api.novu.co/v1"
     format :json
