@@ -2,7 +2,7 @@
 
 <!-- [![Build Status](https://travis-ci.org/Fodoj/groovehq.svg)](https://travis-ci.org/Fodoj/groovehq) -->
 
-Client library for talking to [Novu API](https://docs.novu.co/api/overview/).
+Client library for talking to [Novu API](https://api.novu.co/api).
 
 #### Usage
 
