@@ -1,21 +1,25 @@
 # frozen_string_literal: true
 
-require "novu/api/notification"
+require "novu/api/changes"
 require "novu/api/connection"
 require "novu/api/events"
 require "novu/api/integrations"
 require "novu/api/layouts"
+require "novu/api/notification_groups"
 require "novu/api/notification_templates"
+require "novu/api/notification"
 require "novu/api/subscribers"
 require "novu/api/topics"
 
 module Novu
   class Client
     include HTTParty
+    include Novu::Api::Changes
     include Novu::Api::Connection
     include Novu::Api::Events
     include Novu::Api::Integrations
     include Novu::Api::Layouts
+    include Novu::Api::NotificationGroups
     include Novu::Api::NotificationTemplates
     include Novu::Api::Notification
     include Novu::Api::Subscribers
