@@ -30,7 +30,7 @@ module Novu
       #
       # @return [Hash] The list of topics that match the criteria of the query params are successfully returned.
       # @return [number] status
-      #  - Returns 200 if successful,
+      #  - Returns 200 if successful
       def topics(query = {})
         get("/topics", query: query)
       end

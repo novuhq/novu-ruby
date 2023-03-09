@@ -35,7 +35,7 @@ module Novu
       #
       # @return [Hash] The list of layouts that match the criteria of the query params are successfully returned.
       # @return [number] status
-      #  - Returns 200 if successful,
+      #  - Returns 200 if successful
       #  - Returns 400 if Page size can not be larger than the page size limit.
       def layouts(query = {})
         get("/layouts", query: query)
