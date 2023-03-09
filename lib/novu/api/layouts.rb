@@ -45,7 +45,7 @@ module Novu
       #
       # @pathparams
       # @param `layout_id` [Integer] The ID of the layout to retrieve.
-      # 
+      #
       # @return [Hash] The retrieved layout.
       # @return [number] status
       #  - Returns 200 if the layout with the layoutId provided exists in the database.
@@ -58,7 +58,7 @@ module Novu
       #
       # @pathparams:
       # @param `layout_id` [Integer] The ID of the layout to delete.
-      # 
+      #
       # @return [Hash] The retrieved layout.
       # @return [number] status
       #  - Returns 204 if the layout has been deleted correctly.
@@ -72,14 +72,14 @@ module Novu
       #
       # @pathparams:
       # @param `layout_id` [Integer] The ID of the layout to update.
-      # 
+      #
       # @bodyparams
       # @param `name` [String(optional)] User defined custom name and provided by the user that will name the Layout updated.
       # @param `description` [String(optional)] User defined description of the layout.
       # @param `content` [String(optional)] User defined content for the layout.
       # @param `variables` [Array(optional)] User defined variables to render in the layout placeholders.
       # @param `isDefault` [Boolean(optional)] Variable that defines if the layout is chosen as default when creating a layout.
-      # 
+      #
       # @return [Hash] The updated layout.
       # @return [number] status
       #  - Returns 200 if the layout with the layoutId provided has been updated correctly.
