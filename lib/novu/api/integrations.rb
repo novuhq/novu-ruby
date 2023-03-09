@@ -18,7 +18,7 @@ module Novu
         get("/integrations")
       end
 
-      # Creates a new layout.
+      # Creates a new intgration.
       #
       # @bodyparams:
       # @param `providerId` [String]
@@ -28,7 +28,7 @@ module Novu
       # @param `check` [Boolean]
       #
       # @return [Hash] The created integration entity.
-      # @return [number] status - The status code. Returns 201 if the layout has been successfully created.
+      # @return [number] status - The status code. Returns 201 if the intgration has been successfully created.
       def create_integration(body)
         post("/integrations", body: body)
       end
@@ -63,7 +63,7 @@ module Novu
       # @param `credentials` [Hash]
       # @param `check` [Boolean]
       #
-      # @return [Hash] The updated layout.
+      # @return [Hash] The updated intgration.
       # @return [number] status
       #  - Returns 200 if the integration with the integrationId provided has been updated correctly.
       def update_integration(integration_id, body)
