@@ -7,7 +7,7 @@ module Novu
     # This module includes methods for creating, retrieving, updating, and deleting layouts.
     # It also includes methods for setting and getting the default layout.
     #
-    # For more information on the Novu API(https://api.novu.co/api#/Layouts), see https://novu.com/api/docs.
+    # For more information on the Novu API(https://api.novu.co/api#/Layouts), see https://docs.novu.co/api/layout-creation/.
     module Layouts
       # Creates a new layout.
       #
