@@ -2,7 +2,7 @@
 
 module Novu
   class Api
-    # Module Novu::Api::NotificationGroups provides an API for managing layouts in the Novu application.
+    # Module Novu::Api::NotificationGroups provides an API for managing notification groups in the Novu application.
     #
     # This module includes methods for creating, retrieving notification groups.
     #
