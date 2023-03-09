@@ -4,10 +4,10 @@ module Novu
   class Api
     # Module Novu::Api::NotificationTemplates provides an API for managing notification templates in the Novu application.
     #
-    # This module includes methods for creating, retrieving, updating, and deleting layouts.
+    # This module includes methods for creating, retrieving, updating, and deleting notification templates.
     # It also includes methods for creating and retrieving the notification blueprint.
     #
-    # For more information on the Novu API(https://api.novu.co/api#/Layouts), see https://docs.novu.co/api/layout-creation/.
+    # For more information on the Novu API(https://api.novu.co/api#/Notification%20templates), see https://docs.novu.co/api/get-notification-templates/.
     module NotificationTemplates
       # Returns a list of notification template that can be paginated using the `page` query parameter
       #
@@ -69,7 +69,7 @@ module Novu
       # @param `template_id` [String] The ID of the template to delete.
       #
       # @return [number] status
-      #  - Returns 200 if the layout has been deleted correctly.
+      #  - Returns 200 if the notification template has been deleted correctly.
       def delete_notification_template(template_id)
         delete("/notification-templates/#{template_id}")
       end
@@ -114,9 +114,9 @@ module Novu
       # @bodyparams
       # @param `active` [Boolean]
       #
-      # @return [Hash] The updated layout.
+      # @return [Hash] The updated notification template.
       # @return [number] status
-      #  - Returns 200 if the layout with the template_id provided has been updated correctly.
+      #  - Returns 200 if the notification template with the template_id provided has been updated correctly.
       def update_notification_template_status(template_id, body)
         put("/notification-templates/#{template_id}/status", body: body)
       end
