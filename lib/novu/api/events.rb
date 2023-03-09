@@ -11,7 +11,7 @@ module Novu
       # Trigger event is the main (and the only) way to send notification to subscribers.
       # The trigger identifier is used to match the particular template associated with it.
       # Additional information can be passed according the body interface below
-      # 
+      #
       # @bodyparams:
       # @param `name` [String] The trigger identifier of the template you wish to send. This identifier can be found on the template page.
       # @param `payload` [Hash] The payload object is used to pass additional custom information that could be used to render the template, or perform routing rules based on it. This data will also be available when fetching the notifications feed from the API to display certain parts of the UI.
@@ -20,7 +20,7 @@ module Novu
       # @param `transactionId` [String(optional)] A unique identifier for this transaction, we will generated a UUID if not provided.
       # @param `actor` [Hash(optional)] It is used to display the Avatar of the provided actor's subscriber id or actor object. If a new actor object is provided, we will create a new subscriber in our system
       #
-      # @return [Hash] 
+      # @return [Hash]
       #   - acknowledged [Boolean] - If trigger was acknowledged or not
       #   - status [String] - Status for trigger
       #   - error [Array(optional)] - In case of an error, this field will contain the error message
@@ -32,7 +32,7 @@ module Novu
 
       # Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
       # The bulk API is limited to 100 events per request.
-      # 
+      #
       # @bodyparams:
       # @param `events` [Array[event]]
       #     @event : event structure
@@ -43,7 +43,7 @@ module Novu
       #     @param `transactionId` [String(optional)] A unique identifier for this transaction, we will generated a UUID if not provided.
       #     @param `actor` [Hash(optional)] It is used to display the Avatar of the provided actor's subscriber id or actor object. If a new actor object is provided, we will create a new subscriber in our system
       #
-      # @return [Hash] 
+      # @return [Hash]
       #   - acknowledged [Boolean] - If trigger was acknowledged or not
       #   - status [String] - Status for trigger
       #   - error [Array(optional)] - In case of an error, this field will contain the error message
@@ -63,7 +63,7 @@ module Novu
       # @param `transactionId` [String(optional)] A unique identifier for this transaction, we will generated a UUID if not provided.
       # @param `actor` [Hash(optional)] It is used to display the Avatar of the provided actor's subscriber id or actor object. If a new actor object is provided, we will create a new subscriber in our system
       #
-      # @return [Hash] 
+      # @return [Hash]
       #   - acknowledged [Boolean] - If trigger was acknowledged or not
       #   - status [String] - Status for trigger
       #   - error [Array(optional)] - In case of an error, this field will contain the error message
