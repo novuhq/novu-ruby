@@ -19,21 +19,21 @@ require "novu/api/topics"
 module Novu
   class Client
     include HTTParty
-    # include Novu::Api::Changes
-    # include Novu::Api::Connection
-    # include Novu::Api::Environments
-    # include Novu::Api::Events
-    # include Novu::Api::ExecutionDetails
-    # include Novu::Api::Feeds
-    # include Novu::Api::InboundParse
-    # include Novu::Api::Integrations
-    # include Novu::Api::Layouts
-    # include Novu::Api::Messages
-    # include Novu::Api::NotificationGroups
-    # include Novu::Api::NotificationTemplates
+    include Novu::Api::Changes
+    include Novu::Api::Connection
+    include Novu::Api::Environments
+    include Novu::Api::Events
+    include Novu::Api::ExecutionDetails
+    include Novu::Api::Feeds
+    include Novu::Api::InboundParse
+    include Novu::Api::Integrations
+    include Novu::Api::Layouts
+    include Novu::Api::Messages
+    include Novu::Api::NotificationGroups
+    include Novu::Api::NotificationTemplates
     include Novu::Api::Notification
     include Novu::Api::Subscribers
-    # include Novu::Api::Topics
+    include Novu::Api::Topics
 
     base_uri "https://api.novu.co/v1"
     format :json

@@ -23,7 +23,7 @@ module Novu
       # @return [number] status
       #  - Returns 200 if successful.
       def notifications(query = {})
-        get("/notifications", :query)
+        get("/notifications", query: query)
       end
 
       # Returns a list of notifications stats
