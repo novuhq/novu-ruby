@@ -39,8 +39,12 @@ module Novu
     format :json
 
     def initialize(access_token = nil)
-      @access_token = access_token
-      self.class.default_options.merge!(headers: { "Authorization" => "ApiKey #{access_token}" })
+      raise ArgumentError, "Api Key cannot be blank or nil" if access_token.blank?
+
+      @access_token = access_token.to_s.strip
+      self.class.default_options.merge!(headers: { "Authorization" => "ApiKey #{@access_token}" })
+    rescue ArgumentError => e
+      puts "Error initializing Novu client: #{e.message}"
     end
   end
 end
