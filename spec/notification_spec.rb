@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "pry"
 require_relative "../lib/novu"
 
 RSpec.describe Novu::Api::Notification do
