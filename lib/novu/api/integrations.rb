@@ -18,7 +18,7 @@ module Novu
         get("/integrations")
       end
 
-      # Creates a new intgration.
+      # Creates a new integration.
       #
       # @bodyparams:
       # @param `providerId` [String]
@@ -42,7 +42,7 @@ module Novu
         get("/integrations/active")
       end
 
-      # Returns a list of integrations
+      # Get webhook support status for provider
       #
       # @pathparams
       # @param `provider_id` [String]
