@@ -3,7 +3,7 @@
 require "spec_helper"
 require_relative "../lib/novu"
 
-RSpec.describe Novu::Api::Subscribers do
+RSpec.describe Novu::Api::ExecutionDetails do
   let(:access_token) { "1234567890" }
   let(:client) { Novu::Client.new(access_token) }
   let(:base_uri) { "https://api.novu.co/v1" }
