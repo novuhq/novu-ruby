@@ -82,10 +82,9 @@ RSpec.describe Novu::Api::Subscribers do
 
   describe "#subscriber" do
     it "returns the specified subscriber" do
-      subscriber_id = "32jna21d2331a1j3131n1"
 
       response_body = {
-        _id: "32jna21d2331a1j3131n1",
+        _id: subscriber_id,
         name: "John"
       }.to_json
 
