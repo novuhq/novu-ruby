@@ -87,8 +87,6 @@ module Novu
         delete("/subscribers/#{subscriber_id}")
       end
 
-      # TODO: test below endpoints
-
       # Update subscriber credentials from the Novu platform. Subscriber credentials associated to the delivery methods such as slack and push tokens.
       #
       # @pathparams:
