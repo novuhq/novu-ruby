@@ -13,5 +13,3 @@ group :test do
 end
 
 gem "rubocop", "~> 1.21"
-
-gem 'pry-debugger-jruby'
