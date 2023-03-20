@@ -6,19 +6,19 @@ Gem::Specification.new do |spec|
   spec.name = "novu"
   spec.version = Novu::VERSION
   spec.authors = ["Aman Saini"]
-  spec.email = ["aman.saini@cogoport.com"]
+  spec.email = ["amansaini0003@gmail.com"]
 
   spec.summary = %q{Client library for Novu API.}
   spec.description = %q{Client library for Novu API.}
-  spec.homepage = "https://github.com/aman-saini-cogoport/ruby-novu"
+  spec.homepage = "https://github.com/amansaini0003/ruby-novu"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/aman-saini-cogoport/ruby-novu"
-  spec.metadata["changelog_uri"] = "https://github.com/aman-saini-cogoport/ruby-novu/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/amansaini0003/ruby-novu"
+  spec.metadata["changelog_uri"] = "https://github.com/amansaini0003/ruby-novu/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
