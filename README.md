@@ -153,4 +153,4 @@ The client methods map directly to the Novu API endpoints. Here's a list of all 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://
+Bug reports and pull requests are welcome on GitHub at https://github.com/novuhq/novu-ruby
