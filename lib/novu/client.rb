@@ -35,14 +35,19 @@ module Novu
     include Novu::Api::Subscribers
     include Novu::Api::Topics
 
-    base_uri "https://api.novu.co/v1"
+    DEFAULT_BASE_URI = "https://api.novu.co/v1"
+
+    base_uri DEFAULT_BASE_URI
     format :json
 
-    def initialize(access_token = nil)
+    def initialize(access_token = nil, base_uri = nil)
       raise ArgumentError, "Api Key cannot be blank or nil" if access_token.blank?
 
       @access_token = access_token.to_s.strip
       self.class.default_options.merge!(headers: { "Authorization" => "ApiKey #{@access_token}" })
+
+      base_uri ||= DEFAULT_BASE_URI
+      self.class.base_uri base_uri
     rescue ArgumentError => e
       puts "Error initializing Novu client: #{e.message}"
     end
