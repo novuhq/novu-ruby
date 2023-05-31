@@ -28,6 +28,14 @@ require 'novu'
 client = Novu::Client.new('MY_API_TOKEN')
 ```
 
+If you are using a self-hosted instance of Novu, you can initialize the client with your API token and the URL where your instance is hosted:
+
+```ruby
+require 'novu'
+
+client = Novu::Client.new('MY_API_TOKEN', 'http://your-novu-instance')
+```
+
 You can then call methods on the client to interact with the Novu API:
 
 ```ruby
