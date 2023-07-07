@@ -1,6 +1,18 @@
-# Novu ruby client library
+<div align="center">
+  <a href="https://novu.co" target="_blank">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/2233092/213641039-220ac15f-f367-4d13-9eaf-56e79433b8c1.png">
+    <img src="https://user-images.githubusercontent.com/2233092/213641043-3bbb3f21-3c53-4e67-afe5-755aeb222159.png" width="280" alt="Logo"/>
+  </picture>
+  </a>
+</div>
 
-This is a Ruby client library for communicating with the [Novu API](https://api.novu.co/api).
+# Novu Ruby client library
+
+[![Gem Version](https://img.shields.io/gem/v/novu.svg)](https://rubygems.org/gems/novu)
+[![Gem](https://img.shields.io/gem/dt/novu.svg)](https://rubygems.org/gems/novu/)
+
+> This is a Ruby client library for communicating with the [Novu API](https://api.novu.co/api).
 
 ## Installation
 
@@ -25,7 +37,7 @@ To use the library, first initialize the client with your API token:
 ```ruby
 require 'novu'
 
-client = Novu::Client.new('MY_API_TOKEN')
+client = Novu::Client.new('YOUR_NOVU_API_TOKEN')
 ```
 
 You can then call methods on the client to interact with the Novu API:
@@ -40,114 +52,569 @@ The client methods map directly to the Novu API endpoints. Here's a list of all 
 
 ### Changes
 
-- `changes(query = {})`
-- `count_changes()`
-- `apply_bulk_changes()`
-- `apply_change(change_id)`
+- Get changes: `changes(query = {})`
+
+```ruby
+client.changes({
+    'page' => 1, # optional
+    'limit' => 10, # optional
+    'promoted' => 'hello'
+})
+```
+
+- Get changes count: `count_changes()`
+
+```ruby
+client.count_changes()
+```
+- Apply changes: `apply_bulk_changes()`
+```ruby
+client.apply_change({
+    'changeIds' => ['<insert-all-the-change-ids>']
+})
+```
+
+- Apply change: `apply_change(change_id)`
+
+```ruby
+client.apply_change('7789')
+```
 
 ### Environments
 
-- `current_environment()`
-- `create_environment(body)`
-- `environments()`
-- `update_environment(environment_id, body)`
-- `api_keys()`
-- `regenerate_api_keys()`
+- Get current environment: `current_environment()`
+```ruby
+client.current_environment()
+```
+- Create environment: `create_environment(body)`
+
+```ruby
+payload = {
+    'name' => 'Staging',
+    'parentId' => '7789' # optional
+}
+client.create_environment(payload)
+```
+
+- Get environments: `environments()`
+
+```ruby
+client.environments()
+```
+
+- Update environment by id: `update_environment(environment_id, body)`
+
+```ruby
+client.update_environment('64a713bdexxxxxx', {
+    'name' => 'Local', # optional
+    'identifier' => 'local', # optional
+    'parentId' => '7789', # optional
+    'dns' => { # optional
+        'inboundParseDomain' => 'dev.test' # optional
+    }
+})
+```
+
+- Get api keys: `api_keys()`
+
+```ruby
+client.api_keys()
+```
+
+- Regenerate api keys: `regenerate_api_keys()`
+
+```ruby
+client.regenerate_api_keys()
+```
+
 - `update_widget_settings(body)`
+
+```ruby
+client.update_widget_settings({ 'notificationCenterEncryption' => true})
+```
+
 
 ### Events
 
-- `trigger_event(body)`
-- `trigger_bulk_event(body)`
-- `broadcast_event(body)`
-- `cancel_triggered_event(transaction_id)`
+- Trigger event: `trigger_event(body)`
+
+```ruby
+payload = {
+    'name' => 'Trigger1',
+    'payload' => { # optional
+        'first-name' => 'Adam' # optional
+    },
+    'to' => {
+        'subscriberId' => '7789'
+    },
+    'transactionId' => '89kjfke9893' #optional
+}
+client.trigger_event(payload)
+```
+
+- Bulk trigger event: `trigger_bulk_event(body)`
+
+```ruby
+payload = {
+    'events' => [
+        {
+            'name' => 'Trigger1',
+            'payload' => { # optional
+                'first-name' => 'Adam' # optional
+            },
+            'to' => {
+                'subscriberId' => '7789'
+            },
+            'transactionId' => '89kjfke9893' #optional
+        },
+        {
+            'name' => 'Trigger2',
+            'payload' => { # optional
+                'last-name' => 'Eve' # optional
+            },
+            'to' => {
+                'subscriberId' => '7789'
+            },
+            'transactionId' => 'sw900999as' #optional
+        }
+    ]
+}
+client.trigger_bulk_event(payload)
+```
+
+- Broadcast event to all: `broadcast_event(body)`
+
+```ruby
+payload = {
+    'name' => 'Trigger',
+    'payload' => {
+        'first-name' => 'Adam',
+        'last-name' => 'Eve'
+    },
+    'transactionId' => 'sw900999as' #optional
+}
+client.broadcast_event(payload)
+```
+
+- Cancel triggered event: `cancel_triggered_event(transaction_id)`
+
+```ruby
+client.cancel_triggered_event('8fxxxee-xxx-4f2b-a0e8-xxxxx')
+```
+
 
 ### Execution Details
 
-- `execution_details(query = {})`
+- Get execution details: `execution_details(query = {})`
+
+```ruby
+client.execution_details({
+    'notificationId' => '8fxxx-xxx-ef9xxxxce66',
+    'subscriberId' => '7789'
+})
+```
 
 ### Feeds
 
-- `create_feed(body)`
-- `feeds()`
-- `delete_feed(feed_id)`
+- Create feed: `create_feed(body)`
+
+```ruby
+client.create_feed({
+    'name' => 'New feed'
+})
+```
+
+- Get feeds: `feeds()`
+
+```ruby
+client.feeds()
+```
+
+- Delete feed: `delete_feed(feed_id)`
+
+```ruby
+client.delete_feed('xxxx714xxa8cbxxxxx2d932')
+```
+
 
 ### Inbound Parse
 
-- `validate_mx_record_setup_for_inbound_parse()`
+- Validate the mx record setup for the inbound parse functionality: `validate_mx_record_setup_for_inbound_parse()`
+
+```ruby
+client.validate_mx_record_setup_for_inbound_parse()
+```
 
 ### Integrations
 
-- `integrations()`
-- `create_integration(body)`
-- `active_integrations()`
-- `webhook_provider_status(provider_id)`
-- `update_integration(integration_id, body)`
-- `delete_integration(integration_id)`
-- `channel_limit(channel_type)`
-- `in_app_status()`
+- Get integrations: `integrations()`
+
+```ruby
+client.integrations()
+```
+
+- Create integration: `create_integration(body)`
+
+```ruby
+body = {
+    'providerId' => '<insert->provider->id>',
+    'channel' => '<insert->channel>',
+    'credentials' => {
+        # insert all the fields
+    },
+    'active' => true,
+    'check' => true
+}
+client.create_integration(body)
+```
+
+- Get active integrations: `active_integrations()`
+
+```ruby
+client.active_integrations()
+```
+
+- Get webhook support status for provider: `webhook_provider_status(provider_id)`
+
+```ruby
+client.webhook_provider_status('<insert->provider->id>')
+```
+
+- Update integration: `update_integration(integration_id, body)`
+
+```ruby
+body = {
+    'active' => true,
+    'check' => true
+    'credentials' => {
+        # insert all the fields
+    },
+}
+client.update_integration('<insert->provider->id>', body)
+```
+
+- Delete integration: `delete_integration(integration_id)`
+
+```ruby
+client.delete_integration('<insert->provider->id>')
+```
+
+- Get channel limit: `channel_limit(channel_type)`
+
+```ruby
+client.channel_limit('<insert-channel-type>')
+```
+
+- Get in-app status: `in_app_status()`
+
+```ruby
+client.in_app_status()
+```
+
 
 ### Layouts
 
-- `create_layout(body) `
-- `layouts(query = {})`
-- `layout(layout_id)`
-- `delete_layout(layout_id)`
-- `update_layout(layout_id, body)`
-- `make_default_layout(layout_id)`
+- Layout creation: `create_layout(body)`
+
+```ruby
+payload = {
+    'name' => 'New layout',
+    'content' => '{{{body}}}',
+    'variables' => ['<list-variables-here>'], # optional
+    'description' => 'This is a description for the new layout', # optional
+    'isDefault' => true # optional
+}
+client.create_layout(payload)
+```
+
+- Filter layouts: `layouts(query = {})`
+
+```ruby
+client.layouts({
+    'page' => 1, # optional
+    'pageSize' => 10, # optional
+    'sortBy' => 'createdAt', # optional
+    'orderBy' => 1 # optional
+})
+```
+
+- Get layout: `layout(layout_id)`
+
+```ruby
+client.layout('<insert-layout-id>')
+```
+
+- Delete layout: `delete_layout(layout_id)`
+
+```ruby
+client.delete_layout('<insert-layout-id>')
+```
+
+- Update a layout: `update_layout(layout_id, body)`
+
+```ruby
+payload = {
+    'name' => 'Update layout', # optional
+    'content' => '{{{body}}}', # optional
+    'description' => 'This is a description for the new layout', # optional
+    'isDefault' => true # optional
+    'variables' => ['<list-variables-here>'], # optional
+}
+client.update_layout('<insert-layout-id>', payload)
+```
+
+- Set default layout: `make_default_layout(layout_id)`
+
+```ruby
+client.make_default_layout('<insert-layout-id>')
+```
+
 
 ### Messages
 
-- `messages(query = {})`
-- `delete_message(message_id)`
+- Get messages: `messages(query = {})`
+
+```ruby
+payload = {
+    'channel' => 'slack', # optional
+    'subscriberId' => '7789', # optional
+    'transactionId' =>'sw900999as', # optional
+    'page' => 4, # optional
+    'limit' => 10, # optional
+}
+client.messages(payload)
+```
+
+- Delete message: `delete_message(message_id)`
+
+```ruby
+client.delete_message('<insert-message-id>')
+```
 
 ### Notification Groups
 
-- `create_notification_group(body)`
-- `notification_groups()`
+- Create Notification group: `create_notification_group(body)`
 
-### Notification Templates
+```ruby
+client.create_notification_group({
+    'name' => '<insert-name>'
+})
+```
 
-- `notification_templates(query = {})`
-- `create_notification_template(body)`
-- `update_notification_template(template_id, body)`
-- `delete_notification_template(template_id)`
-- `notification_template(template_id)`
-- `notification_template_blueprint(template_id)`
-- `create_notification_template_blueprint(template_id)`
-- `update_notification_template_status(template_id, body)`
+- Get Notification groups: `notification_groups()`
+
+```ruby
+client.notification_groups()
+```
 
 ### Notification
 
-- `notifications(query = {})`
-- `notifications_stats()`
-- `notifications_graph_stats(query = {})`
-- `notification(notification_id)`
+- Get notifications: `notifications(query = {})`
+
+```ruby
+body = {
+    'channels' => ['<insert-channels>'],
+    'templates' => ['<insert-templates'],
+    'emails' => ['<insert-emails'],
+    'search' => '<insert-search-string>'
+    'page' => 2 , # optional
+    'transactionId' =>'sw900999as', # optional
+}
+client.notifications(body)
+```
+
+- Get notification statistics: `notifications_stats()`
+
+```ruby
+client.notifications_stats()
+```
+
+- Get notification graph statistics: `notifications_graph_stats(query = {})`
+
+```ruby
+client.notifications_graph_stats({
+    'days' => 5 # optional
+})
+```
+
+- Get notification: `notification(notification_id)`
+
+```ruby
+client.notification('<insert-notification-id>')
+```
 
 ### Subscribers
 
-- `subscribers(query = {}) `
-- `create_subscriber(body)`
+- Get subscribers: `subscribers(query = {}) `
+
+```ruby
+client.subscribers({
+    'page' => 1, # optional
+    'limit' => 15, # optional
+})
+```
+
+- Create subscriber: `create_subscriber(body)`
+
+```ruby
+payload = {
+    'subscriberId' => '7789',
+    'email' => '<insert-email>', # optional
+    'firstName' => '<insert-firstName>', # optional
+    'lastName' => '<insert-lastName>', # optional
+    'phone' => '<insert-phone>', # optional
+    'avatar' => '<insert-profile-avatar>' # optional
+}
+client.create_subscriber(payload)
+```
+
 - `subscriber(subscriber_id)`
-- `update_subscriber(subscriber_id, body)`
-- `delete_subscriber(subscriber_id)`
-- `update_subscriber_credentials(subscriber_id, body)`
-- `update_subscriber_online_status(subscriber_id, body)`
-- `subscriber_preferences(subscriber_id)`
-- `update_subscriber_preference(subscriber_id, template_id, body)`
-- `subscriber_notification_feed(subscriber_id, query = {})`
-- `subscriber_unseen_notification_count(subscriber_id, query = {})`
-- `mark_subscriber_feed_seen(subscriber_id, body)`
-- `mark_message_action_seen(subscriber_id, message_id, type)`
+
+```ruby
+client.subscriber('<insert-subscriber-id>')
+```
+
+- Update subscriber: `update_subscriber(subscriber_id, body)`
+
+```ruby
+payload = {
+    'email' => '<insert-email>', # optional
+    'firstName' => '<insert-firstName>', # optional
+    'lastName' => '<insert-lastName>', # optional
+    'phone' => '<insert-phone>', # optional
+    'avatar' => '<insert-profile-avatar>' # optional
+}
+client.update_subscriber('<insert-subscriber-id>', payload)
+```
+
+- Delete subscriber: `delete_subscriber(subscriber_id)`
+
+```ruby
+client.delete_subscriber('<insert-subscriber-id>')
+```
+
+- Update subscriber credentials: `update_subscriber_credentials(subscriber_id, body)`
+
+```ruby
+body = {
+    'providerId' => '<insert-provider-id>',
+    'credentials' => {
+        # Insert all fields here 
+    } 
+}
+client.update_subscriber_credentials('<insert-subscriber-id>', body)
+```
+
+- Update subscriber online status: `update_subscriber_online_status(subscriber_id, body)`
+
+```ruby
+client.update_subscriber_online_status('<insert-subscriber-id>', { 'isOnline' => true })
+```
+
+- Get subscriber preferences: `subscriber_preferences(subscriber_id)`
+
+```ruby
+client.subscriber_preferences('<insert-subscriber-id>')
+```
+
+- Update subscriber preference: `update_subscriber_preference(subscriber_id, template_id, body)`
+
+```ruby
+body = {
+    'channel' => {
+        # Insert all fields here
+    },
+    'enabled' => true
+}
+client.update_subscriber_preference('<insert-subscriber-id>', '<insert-template-id>', body)
+```
+
+- Get in-app notification feed for a particular subscriber: `subscriber_notification_feed(subscriber_id, query = {})`
+
+```ruby
+client.subscriber_notification_feed('<insert-subscriber-id>', {
+    'page' => 3, # optional
+    'limit' => 15, # optional
+    'read' => true, # optional
+    'seen' => true, # optional
+})
+```
+
+- Get the unseen in-app notifications count for subscribers feed: `subscriber_unseen_notification_count(subscriber_id, query = {})`
+
+```ruby
+client.subscriber_unseen_notification_count('<insert-subscriber-id>', {
+    'limit' => 15, # optional
+    'seen' => false, # optional
+})
+```
+
+- Mark a subscriber feed message as seen: `mark_subscriber_feed_seen(subscriber_id, body)`
+
+```ruby
+client.mark_subscriber_feed_seen('<insert-subscriber-id>', {
+    'messageId' => '<insert-message-id>',
+    'mark' => {
+         'seen' => true,
+         'read' => true
+    }
+})
+```
+
+- Mark message action as seen: `mark_message_action_seen(subscriber_id, message_id, type)`
+
+```ruby
+client.mark_message_action_seen('<insert-subscriber-id>', '<insert-message-id>', '<insert-type>')
+```
 
 ### Topics
 
-- `create_topic(body)`
-- `topics(query = {})`
-- `add_subscribers(topic_key, body)`
+- Topic creation: `create_topic(body)`
+
+```ruby
+client.create_topic({
+    'key' => 'key',
+    'name' => 'name'
+})
+```
+
+- Filter topics: `topics(query = {})`
+
+```ruby
+client.topics({
+    'name' => 'name', # optional
+    'page' => 1, # optional
+    'pageSize' => 10, # optional
+})
+```
+
+- Subscribers addition: `add_subscribers(topic_key, body)`
+
+```ruby
+client.add_subscribers('<insert-topic-key>', {
+    'subscribers' => ['<insert-list-of-subscribers>']
+})
+```
+
 - `remove_subscribers(topic_key, body)`
-- `topic(topic_key)`
-- `rename_topic(topic_key, body)`
+
+```ruby
+client.
+```
+
+- Get topic: `topic(topic_key)`
+
+```ruby
+client.topic('<insert-topic-key>')
+```
+
+- Rename a topic: `rename_topic(topic_key, body)`
+
+```ruby
+client.rename_topic('<insert-topic-key>', {
+    'name' => 'new name'
+})
+```
 
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api/overview).
 
