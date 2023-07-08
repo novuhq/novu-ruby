@@ -257,8 +257,8 @@ client.integrations()
 
 ```ruby
 body = {
-    'providerId' => '<insert->provider->id>',
-    'channel' => '<insert->channel>',
+    'providerId' => '<insert-provider-id>',
+    'channel' => '<insert-channel>',
     'credentials' => {
         # insert all the fields
     },
@@ -277,7 +277,7 @@ client.active_integrations()
 - Get webhook support status for provider: `webhook_provider_status(provider_id)`
 
 ```ruby
-client.webhook_provider_status('<insert->provider->id>')
+client.webhook_provider_status('<insert-provider-id>')
 ```
 
 - Update integration: `update_integration(integration_id, body)`
@@ -290,13 +290,13 @@ body = {
         # insert all the fields
     },
 }
-client.update_integration('<insert->provider->id>', body)
+client.update_integration('<insert-provider-id>', body)
 ```
 
 - Delete integration: `delete_integration(integration_id)`
 
 ```ruby
-client.delete_integration('<insert->provider->id>')
+client.delete_integration('<insert-provider-id>')
 ```
 
 - Get channel limit: `channel_limit(channel_type)`
@@ -407,6 +407,91 @@ client.create_notification_group({
 client.notification_groups()
 ```
 
+### Notification Templates
+
+- Get notification templates: `notification_templates(query = {})`
+
+```ruby
+client.notification_templates({
+    'page' => 4, # optional
+    'limit' => 10, # optional
+})
+```
+
+- Create notification template: `create_notification_template(body)`
+
+```ruby
+body = {
+    'name' => '<insert-name>',
+    'notificationGroupId' => 'notificationGroupId',
+    'tags' => ['tags'], # optional
+    'description' => 'description', # optional
+    'steps' => [ # optional
+       # insert all fields here
+    ], 
+    'active' => true, # optional
+    'draft' => true, # optional
+    'critical' => true, # optional
+    'preferenceSettings' => { # optional
+       # insert all fields here
+    },
+    'blueprintId' => 'blueprintId' # optional
+}
+client.create_notification_template(body)
+```
+
+- Update notification template: `update_notification_template(template_id, body)`
+
+```ruby
+body = {
+    'name' => '<insert-name>',
+    'notificationGroupId' => 'notificationGroupId',
+    'tags' => ['tags'], # optional
+    'description' => 'description', # optional
+    'steps' => [ # optional
+       # insert all fields here
+    ], 
+    'active' => true, # optional
+    'draft' => true, # optional
+    'critical' => true, # optional
+    'preferenceSettings' => { # optional
+       # insert all fields here
+    },
+    'blueprintId' => 'blueprintId' # optional
+}
+client.update_notification_template('<insert-template-id>', body)
+```
+
+- Delete notification template`delete_notification_template(template_id)`
+
+```ruby
+client.delete_notification_template('<insert-template-id>')
+```
+
+- Get a notification template: `notification_template(template_id)`
+
+```ruby
+client.notification_template('<insert-template-id>')
+```
+
+- Get a notification template blueprint: `notification_template_blueprint(template_id)`
+
+```ruby
+client.notification_template_blueprint('<insert-template-id>')
+```
+
+- Create a new notification template blueprint: `create_notification_template_blueprint(template_id)`
+
+```ruby
+client.create_notification_template_blueprint('<insert-template-id>')
+```
+
+- Update notification template status: `update_notification_template_status(template_id, body)`
+
+```ruby
+client.update_notification_template_status('<insert-template-id>', { 'active' => true })
+```
+
 ### Notification
 
 - Get notifications: `notifications(query = {})`
@@ -414,8 +499,8 @@ client.notification_groups()
 ```ruby
 body = {
     'channels' => ['<insert-channels>'],
-    'templates' => ['<insert-templates'],
-    'emails' => ['<insert-emails'],
+    'templates' => ['<insert-templates>'],
+    'emails' => ['<insert-emails>'],
     'search' => '<insert-search-string>'
     'page' => 2 , # optional
     'transactionId' =>'sw900999as', # optional
