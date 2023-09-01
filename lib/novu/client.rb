@@ -35,7 +35,7 @@ module Novu
     include Novu::Api::Subscribers
     include Novu::Api::Topics
 
-    base_uri "https://api.novu.co/v1"
+    base_uri ENV.fetch("NOVU_BASE_API_URL", "https://api.novu.co/v1")
     format :json
 
     def initialize(access_token = nil)
