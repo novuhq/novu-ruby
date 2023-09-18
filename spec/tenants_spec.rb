@@ -33,14 +33,10 @@ RSpec.describe Novu::Api::Tenants do
         context "when no query params are passed" do
             it "returns all tenants" do
                 response_body = {
-                page: 0,
-                totalCount: 2,
-                pageSize: 10,
-                data: [
-                    {
-                    _id: "63f71b3ef067290fa669106d"
-                    }
-                ]
+                    page: 0,
+                    hasMore: true,
+                    pageSize: 10,
+                    data: []
                 }.to_json
         
                 stub_request(:get, "#{base_uri}/tenants")
@@ -58,7 +54,7 @@ RSpec.describe Novu::Api::Tenants do
                 query_params = { page: 1 }
                 response_body = {
                     page: 0,
-                    totalCount: 1,
+                    hasMore: true,
                     pageSize: 10,
                     data: []
                 }.to_json
