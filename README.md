@@ -661,7 +661,8 @@ client.create_tenant({
     'identifier' => '<a-unique-identifier>',
     'name' => '<name-of-the-tenant>',
     'data' => {
-
+        'company' => 'a company',
+        'date-registered' => '2023-0-15'
     }
 })
 ```
