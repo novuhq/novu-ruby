@@ -14,6 +14,7 @@ require "novu/api/notification_groups"
 require "novu/api/notification_templates"
 require "novu/api/notification"
 require "novu/api/subscribers"
+require "novu/api/tenants"
 require "novu/api/topics"
 
 module Novu
@@ -33,6 +34,7 @@ module Novu
     include Novu::Api::NotificationTemplates
     include Novu::Api::Notification
     include Novu::Api::Subscribers
+    include Novu::Api::Tenants
     include Novu::Api::Topics
 
     base_uri "https://api.novu.co/v1"

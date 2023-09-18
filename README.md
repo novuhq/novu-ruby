@@ -640,8 +640,8 @@ client.subscriber_unseen_notification_count('<insert-subscriber-id>', {
 client.mark_subscriber_feed_seen('<insert-subscriber-id>', {
     'messageId' => '<insert-message-id>',
     'mark' => {
-         'seen' => true,
-         'read' => true
+        'seen' => true,
+        'read' => true
     }
 })
 ```
@@ -650,6 +650,50 @@ client.mark_subscriber_feed_seen('<insert-subscriber-id>', {
 
 ```ruby
 client.mark_message_action_seen('<insert-subscriber-id>', '<insert-message-id>', '<insert-type>')
+```
+
+### Tenants
+
+- Tenant create: `create_tenant(body)`
+
+```ruby
+client.create_tenant({
+    'identifier' => '<a-unique-identifier>',
+    'name' => '<name-of-the-tenant>',
+    'data' => {
+
+    }
+})
+```
+
+- Get tenants: `tenants(query = {})`
+
+```ruby
+client.tenants({
+    'page' => 1, # optional
+    'limit' => 10, # optional
+})
+```
+
+- Get tenant: `tenant(identifier)`
+
+```ruby
+client.tenant('<a-unique-identifier>')
+```
+
+- Update tenant: `update_tenant(identifier, body)`
+
+```ruby
+client.update_tenant('<a-unique-identifier>', {
+    'identifier' => '<a-unique-identifier>',
+    'name' => '<name-of-the-tenant>',
+})
+```
+
+- Delete tenant: `delete_tenant(identifier)`
+
+```ruby
+client.delete_tenant('<a-unique-identifier>')
 ```
 
 ### Topics
@@ -701,7 +745,7 @@ client.rename_topic('<insert-topic-key>', {
 })
 ```
 
-### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api/overview).
+### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api-reference).
 
 ## Contributing
 
