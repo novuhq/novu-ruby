@@ -614,6 +614,32 @@ body = {
 client.update_subscriber_preference('<insert-subscriber-id>', '<insert-template-id>', body)
 ```
 
+- Create bulk subscribers: `create_bulk_subscribers(body)`
+```ruby
+payload = {
+    'subscribers' => [
+        {
+            'name' => 'subscriber-1',
+            'email' => 'user1@example.com',
+            'firstName' => 'test1',
+            'lastName' => 'test1',
+            'phone' => '08122442244',
+            'subscriberId' => 'subscriber-test-1221'
+        },
+        {
+            'name' => 'subscriber2',
+            'email' => 'user2@example.com',
+            'firstName' => 'test2',
+            'lastName' => 'test2',
+            'phone' => '0814422334',
+            'subscriberId' => 'subscriber-test-9090'
+        }
+    ]
+}
+client.create_bulk_subscribers(payload)
+```
+
+
 - Get in-app notification feed for a particular subscriber: `subscriber_notification_feed(subscriber_id, query = {})`
 
 ```ruby

@@ -306,4 +306,48 @@ RSpec.describe Novu::Api::Subscribers do
       expect(result.code).to eq(201)
     end
   end
+
+  describe "#create_bulk_subscribers" do
+    it "create bulk subscribers" do
+			body = {
+        subscribers: [
+					{
+						'name' => 'subscriber-1',
+						'email' => 'user1@example.com',
+						'firstName' => 'test1',
+						'lastName' => 'test1',
+						'phone' => '08122442244',
+						'subscriberId' => 'subscriber-test-1221'
+					},
+					{
+						'name' => 'subscriber2',
+						'email' => 'user2@example.com',
+						'firstName' => 'test2',
+						'lastName' => 'test2',
+						'phone' => '0814422334',
+						'subscriberId' => 'subscriber-test-9090'
+					}
+        ]
+      }
+
+      response_body = {
+        data: {
+					failed: [],
+					updated: [],
+					created: [
+						{ subscriberId: 'subscriber-test-1221'},
+						{ subscriberId: 'subscriber-test-9090'},
+					]
+				}
+      }.to_json
+
+      stub_request(:post, "#{base_uri}/subscribers/bulk")
+        .with(body: body).to_return(status: 201, body: response_body)
+
+      result = client.create_bulk_subscribers(body)
+
+      expect(result.body).to eq(response_body)
+      expect(result.code).to eq(201)
+		end
+	end
 end
