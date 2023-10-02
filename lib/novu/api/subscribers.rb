@@ -209,7 +209,7 @@ module Novu
         post("/subscribers/#{subscriber_id}/messages/#{message_id}/actions/#{type}")
       end
 
-			# Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
+			# Using this endpoint you can create multiple subscribers at once, to avoid multiple calls to the API.
       # The bulk API is limited to 500 subscribers per request.
       #
       # @bodyparams:
