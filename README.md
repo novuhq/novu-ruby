@@ -311,6 +311,12 @@ client.channel_limit('<insert-channel-type>')
 client.in_app_status()
 ```
 
+- Set integration as primary: `set_integration_as_primary(integration_id)`
+
+```ruby
+client.set_integration_as_primary('<insert-integration-id>')
+```
+
 
 ### Layouts
 
