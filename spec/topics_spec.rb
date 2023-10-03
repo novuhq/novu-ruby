@@ -165,4 +165,16 @@ RSpec.describe Novu::Api::Topics do
       expect(result.code).to eq(200)
     end
   end
+
+  describe "#delete_topic" do
+    it "delete a topic by its topic key if it has no subscribers" do
+      
+
+      stub_request(:delete, "#{base_uri}/topics/#{topic_key}")
+        .to_return(status: 204)
+
+      result = client.delete_topic(topic_key)
+      expect(result.code).to eq(204)
+    end
+  end
 end

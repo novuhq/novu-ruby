@@ -99,6 +99,17 @@ module Novu
       def rename_topic(topic_key, body)
         patch("/topics/#{topic_key}", body: body)
       end
+
+      # Delete topic
+      # Delete a topic by its topic key if it has no subscribers
+      #
+      # @pathparams
+      # @param `topic_key` [String]
+      #
+      # @return [number] status - The status code. Returns 204 if successfully deleted topic.
+      def delete_topic(topic_key)
+        delete("/topics/#{topic_key}")
+      end
     end
   end
 end

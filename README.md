@@ -767,6 +767,18 @@ client.rename_topic('<insert-topic-key>', {
 })
 ```
 
+- Delete topic: `delete_topic(topic_key)`
+
+```ruby
+client.delete_topic('<insert-topic-key>')
+```
+
+- Check topic subsriber: `subscriber_topic(topic_key, externalSubscriberId)`
+
+```ruby
+client.subscriber_topic('<insert-topic-key>', '<insert-externalSubscriberId>')
+```
+
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api-reference).
 
 ## Contributing
