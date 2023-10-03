@@ -692,9 +692,9 @@ client.mark_all_subscriber_messages('<insert-subscriber-id>', body)
 ```ruby
 query = {
   'environmentId' => '<insert-environment-id>',
-    'code' => '<insert-code>',
-    'hmacHash' => '<insert-hmacHash>',
-    'integrationIdentifier' => '<insert-integration-identifier>'
+  'code' => '<insert-code>',
+  'hmacHash' => '<insert-hmacHash>',
+  'integrationIdentifier' => '<insert-integration-identifier>'
 }
 client.provider_oauth_redirect('<insert-subscriber-id>', '<insert-provider-id>', query)
 ```
@@ -703,8 +703,8 @@ client.provider_oauth_redirect('<insert-subscriber-id>', '<insert-provider-id>',
 ```ruby
 query = {
   'environmentId' => '<insert-environment-id>',
-    'hmacHash' => '<insert-hmacHash>',
-    'integrationIdentifier' => '<insert-integration-identifier>'
+  'hmacHash' => '<insert-hmacHash>',
+  'integrationIdentifier' => '<insert-integration-identifier>'
 }
 client.chat_oauth('<insert-subscriber-id>', '<insert-provider-id>', query)
 ```
