@@ -50,6 +50,20 @@ client.notifications
 
 The client methods map directly to the Novu API endpoints. Here's a list of all the available methods. Check [the API docs](https://docs.novu.co/api/overview) for list of available `methods`.
 
+### Blueprints
+
+- Get V1blueprints: `get_blueprint(template_id)`
+
+```ruby
+client.get_blueprint('<insert-template-id>')
+```
+
+- Get V1blueprints by category: `group_blueprints_by_category()`
+
+```ruby
+client.group_blueprints_by_category()
+```
+
 ### Changes
 
 - Get changes: `changes(query = {})`
@@ -70,7 +84,7 @@ client.count_changes()
 
 - Apply changes: `apply_bulk_changes()`
 ```ruby
-client.apply_change({
+client.apply_bulk_changes({
     'changeIds' => ['<insert-all-the-change-ids>']
 })
 ```
