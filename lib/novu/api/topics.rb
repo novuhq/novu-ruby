@@ -61,6 +61,18 @@ module Novu
         post("/topics/#{topic_key}/subscribers/removal", body: body)
       end
 
+      # Check topic subsriber
+      # Check if a subscriber belongs to a certain topic
+      #
+      # @pathparams
+      # @param `topic_key` [String]
+      # @param `externalSubscriberId` [String] The id of the subscriber created on `/subscribers` endpoint
+      #
+      # @return [number] status - The status code. Returns 200 if subscriber was added to the topic.
+      def subscriber_topic(topic_key, externalSubscriberId)
+        get("/topics/#{topic_key}/subscribers/#{externalSubscriberId}")
+      end
+
       # Get a topic by its topic key
       #
       # @pathparams
