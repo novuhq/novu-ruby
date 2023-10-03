@@ -100,6 +100,17 @@ module Novu
       def in_app_status
         get("/integrations/in-app/status")
       end
+
+      # Set integration as primary
+      #
+      # @pathparams
+      # @param `integration_id` [String]
+      # 
+      # @return [number] status
+      #  - Returns 200 if successful
+      def set_integration_as_primary(integration_id)
+        post("/integrations/#{integration_id}/set-primary")
+      end
     end
   end
 end

@@ -145,4 +145,21 @@ RSpec.describe Novu::Api::Integrations do
       expect(result.code).to eq(200)
     end
   end
+
+  describe "#set_integration_as_primary" do
+    it "sets an integration as primary" do
+      integration_id = "63f71b3ef067290fa669106d"
+      response_body = {
+        _id: "63f71b3ef067290fa669106d"
+      }.to_json
+      
+      stub_request(:post, "#{base_uri}/integrations/#{integration_id}/set-primary")
+        .to_return(status: 200, body: response_body)
+
+      result = client.set_integration_as_primary(integration_id)
+
+      expect(result.body).to eq(response_body)
+      expect(result.code).to eq(200)
+    end
+  end
 end
