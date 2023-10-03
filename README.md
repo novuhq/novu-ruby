@@ -557,7 +557,7 @@ client.notification('<insert-notification-id>')
 client.subscribers({
     'page' => 1, # optional
     'limit' => 15, # optional
-})
+}) 
 ```
 
 - Create subscriber: `create_subscriber(body)`
@@ -609,6 +609,12 @@ body = {
     } 
 }
 client.update_subscriber_credentials('<insert-subscriber-id>', body)
+```
+
+- Delete subscriber credentials by providerId: `delete_subscriber_credentials(subscriberId, providerId)`
+
+```ruby
+client.delete_subscriber_credentials('<insert-subscriber-id>', '<insert-provider-id>')
 ```
 
 - Update subscriber online status: `update_subscriber_online_status(subscriber_id, body)`
@@ -671,6 +677,36 @@ client.mark_subscriber_feed_seen('<insert-subscriber-id>', {
 
 ```ruby
 client.mark_message_action_seen('<insert-subscriber-id>', '<insert-message-id>', '<insert-type>')
+```
+
+- Marks all the subscriber messages: `mark_all_subscriber_messages(subscriber_id, body)`
+
+```ruby
+body = {
+  'markAs' => 'seen'
+}
+client.mark_all_subscriber_messages('<insert-subscriber-id>', body)
+```
+
+- Handle providers OAUTH redirect: `provider_oauth_redirect(subscriber_id, provider_id, query)`
+```ruby
+query = {
+  'environmentId' => '<insert-environment-id>',
+    'code' => '<insert-code>',
+    'hmacHash' => '<insert-hmacHash>',
+    'integrationIdentifier' => '<insert-integration-identifier>'
+}
+client.provider_oauth_redirect('<insert-subscriber-id>', '<insert-provider-id>', query)
+```
+
+- Handle chat OAUTH: `chat_oauth(subscriber_id, provider_id, query)`
+```ruby
+query = {
+  'environmentId' => '<insert-environment-id>',
+    'hmacHash' => '<insert-hmacHash>',
+    'integrationIdentifier' => '<insert-integration-identifier>'
+}
+client.chat_oauth('<insert-subscriber-id>', '<insert-provider-id>', query)
 ```
 
 ### Tenants
