@@ -67,6 +67,7 @@ client.changes({
 ```ruby
 client.count_changes()
 ```
+
 - Apply changes: `apply_bulk_changes()`
 ```ruby
 client.apply_change({
