@@ -33,11 +33,13 @@ module Novu
 
       # Apply Bulk Change
       #
+      # @bodyParams
+      # @param changeIds [Array] The list of environment IDs to apply changes to.
       # @return [Hash] updated change.
       # @return [number] status
       #  - Returns 201 if the bulk change has been updated correctly.
-      def apply_bulk_changes
-        post("/changes/bulk/apply")
+      def apply_bulk_changes(changeIds)
+        post("/changes/bulk/apply", body: changeIds)
       end
 
       # Apply change

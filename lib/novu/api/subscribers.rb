@@ -45,7 +45,7 @@ module Novu
       # Retrieves the subscriber with the given ID.
       #
       # @pathparams
-      # @param `subscribe_id` [String] The ID of the subscriber to retrieve.
+      # @param `subscriber_id` [String] The ID of the subscriber to retrieve.
       #
       # @return [Hash] The retrieved subscriber.
       # @return [number] status
@@ -101,6 +101,19 @@ module Novu
       #  - Returns 200 if the subscriber credentials has been updated correctly.
       def update_subscriber_credentials(subscriber_id, body)
         put("/subscribers/#{subscriber_id}/credentials", body: body)
+      end
+
+      # Delete subscriber credentials by providerId
+      # Delete subscriber credentials such as slack and expo tokens.
+      #
+      # @pathParams:
+      # @param `subscriberId` [String] The ID of the subscriber to update credentials.
+      # @param `providerId` [String] The provider identifier for the credentials
+      #
+      # @return [number] status
+      #  - Returns 204 if the subscriber credentials has been deleted successfully.
+      def delete_subscriber_credentials(subscriberId, providerId)
+        delete("/subscribers/#{subscriberId}/credentials/#{providerId}")
       end
 
       # Used to update the subscriber isOnline flag.
@@ -207,6 +220,57 @@ module Novu
       #  - Returns 201 if successful
       def mark_message_action_seen(subscriber_id, message_id, type)
         post("/subscribers/#{subscriber_id}/messages/#{message_id}/actions/#{type}")
+      end
+
+      # Marks all the subscriber messages as read, unread, seen or unseen.
+      # 
+      # @pathparams
+      # @param `subscriber_id` [String]
+      # 
+      # @bodyParams:
+      # @param `markAs` [String] The type of action to perform either read, unread, seen or unseen.
+      # @param `feedIdentifier` [String|Array(Optional)]  The feed id (or array) to mark messages of a particular feed.
+      #
+      # @return [number] status
+      #  - Returns 201 if successful
+      def mark_all_subscriber_messages(subscriber_id, body)
+        post("/subscribers/#{subscriber_id}/messages/mark-all", body: body)
+      end
+
+      # Handle providers OAUTH redirect
+      #
+      # @pathparams:
+      # @param `subscriberId` [String]
+      # @param `providerId` [String]
+      #
+      # @queryparams:
+      # @param `code` [String]
+      # @param `hmacHash` [String]
+      # @param `environmentId` [String]
+      # @param `integrationIdentifier` [String]
+      #
+      # @return [Hash] The list of changes that match the criteria of the query params are successfully returned.
+      # @return [number] status
+      #  - Returns 200 if successful
+      def provider_oauth_redirect(subscriberId, providerId, query = {})
+        get("/subscribers/#{subscriberId}/credentials/#{providerId}/oauth/callback", query: query)
+      end
+
+      # Handle chat OAUTH
+      #
+      # @pathparams:
+      # @param `subscriberId` [String]
+      # @param `providerId` [String]
+      #
+      # @queryparams:
+      # @param `hmacHash` [String]
+      # @param `environmentId` [String]
+      # @param `integrationIdentifier` [String]
+      #
+      # @return [number] status
+      #  - Returns 200 if successful
+      def chat_oauth(subscriberId, providerId, query = {})
+        get("/subscribers/#{subscriberId}/credentials/#{providerId}/oauth", query: query)
       end
     end
   end

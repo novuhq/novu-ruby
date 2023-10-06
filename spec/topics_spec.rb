@@ -114,6 +114,19 @@ RSpec.describe Novu::Api::Topics do
     end
   end
 
+  describe "#subscriber_topic" do
+    it "Check if a subscriber belongs to a certain topic" do
+      body = ""
+
+      stub_request(:get, "#{base_uri}/topics/#{topic_key}/subscribers/string")
+        .to_return(status: 200)
+
+      result = client.subscriber_topic(topic_key, 'string')
+      expect(result.body).to eq(body)
+      expect(result.code).to eq(200)
+    end
+  end
+
   describe "#topic" do
     it "returns the specified topic by its topic key" do
       response_body = {
@@ -150,6 +163,18 @@ RSpec.describe Novu::Api::Topics do
 
       expect(result.body).to eq(response_body)
       expect(result.code).to eq(200)
+    end
+  end
+
+  describe "#delete_topic" do
+    it "delete a topic by its topic key if it has no subscribers" do
+      
+
+      stub_request(:delete, "#{base_uri}/topics/#{topic_key}")
+        .to_return(status: 204)
+
+      result = client.delete_topic(topic_key)
+      expect(result.code).to eq(204)
     end
   end
 end

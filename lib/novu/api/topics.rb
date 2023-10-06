@@ -61,6 +61,18 @@ module Novu
         post("/topics/#{topic_key}/subscribers/removal", body: body)
       end
 
+      # Check topic subsriber
+      # Check if a subscriber belongs to a certain topic
+      #
+      # @pathparams
+      # @param `topic_key` [String]
+      # @param `externalSubscriberId` [String] The id of the subscriber created on `/subscribers` endpoint
+      #
+      # @return [number] status - The status code. Returns 200 if subscriber was added to the topic.
+      def subscriber_topic(topic_key, externalSubscriberId)
+        get("/topics/#{topic_key}/subscribers/#{externalSubscriberId}")
+      end
+
       # Get a topic by its topic key
       #
       # @pathparams
@@ -86,6 +98,17 @@ module Novu
       #  - Returns 200 if successful
       def rename_topic(topic_key, body)
         patch("/topics/#{topic_key}", body: body)
+      end
+
+      # Delete topic
+      # Delete a topic by its topic key if it has no subscribers
+      #
+      # @pathparams
+      # @param `topic_key` [String]
+      #
+      # @return [number] status - The status code. Returns 204 if successfully deleted topic.
+      def delete_topic(topic_key)
+        delete("/topics/#{topic_key}")
       end
     end
   end
