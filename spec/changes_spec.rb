@@ -17,7 +17,7 @@ RSpec.describe Novu::Api::Changes do
         "pageSize": 10,
         "data": [
           {
-            "_id": "63f71b3ef067290fa669106d"
+            "_id": "string"
           }
         ]
       }.to_json
@@ -48,6 +48,10 @@ RSpec.describe Novu::Api::Changes do
 
   describe "#apply_bulk_changes" do
     it "apply bulk change" do
+      payload = {
+        'changeIds' => ['string']
+      }
+
       response_body = {
         _id: "string",
         _creatorId: "string"
@@ -56,7 +60,7 @@ RSpec.describe Novu::Api::Changes do
       stub_request(:post, "#{base_uri}/changes/bulk/apply")
         .to_return(status: 201, body: response_body)
 
-      result = client.apply_bulk_changes
+      result = client.apply_bulk_changes(payload)
 
       expect(result.body).to eq(response_body)
       expect(result.code).to eq(201)

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "novu/api/blueprints"
 require "novu/api/changes"
 require "novu/api/connection"
 require "novu/api/environments"
@@ -20,6 +21,7 @@ require "novu/api/topics"
 module Novu
   class Client
     include HTTParty
+    include Novu::Api::Blueprints
     include Novu::Api::Changes
     include Novu::Api::Connection
     include Novu::Api::Environments

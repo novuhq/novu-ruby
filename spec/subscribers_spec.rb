@@ -159,6 +159,17 @@ RSpec.describe Novu::Api::Subscribers do
     end
   end
 
+  describe "#delete_subscriber_credentials" do
+    it "#Delete subscriber credentials such as slack and expo tokens." do
+      providerId = 'slack'
+      
+      stub_request(:delete, "#{base_uri}/subscribers/#{subscriber_id}/credentials/#{providerId}")
+        .to_return(status: 204)
+
+      result = client.delete_subscriber_credentials(subscriber_id, providerId)
+    end
+  end
+
   describe "#update_subscriber_online_status" do
     it "update subscriber online status" do
       body = {
@@ -307,8 +318,8 @@ RSpec.describe Novu::Api::Subscribers do
     end
   end
 
-  describe "#create_bulk_subscribers" do
-    it "create bulk subscribers" do
+  describe "#bulk_create_subscribers" do
+    it "bulk create subscribers" do
 			body = {
         subscribers: [
 					{
@@ -344,10 +355,71 @@ RSpec.describe Novu::Api::Subscribers do
       stub_request(:post, "#{base_uri}/subscribers/bulk")
         .with(body: body).to_return(status: 201, body: response_body)
 
-      result = client.create_bulk_subscribers(body)
+      result = client.bulk_create_subscribers(body)
 
       expect(result.body).to eq(response_body)
       expect(result.code).to eq(201)
 		end
 	end
+  
+  describe "#mark_all_subscriber_messages" do
+    it "mark all subscriber messages" do
+      payload = {
+        'markAs' => 'seen'
+      }
+      response_body = "number"
+
+      stub_request(:post, "#{base_uri}/subscribers/#{subscriber_id}/messages/mark-all")
+        .with(body: payload)
+        .to_return(status: 201, body: response_body)
+
+      result = client.mark_all_subscriber_messages(subscriber_id, payload)
+
+      expect(result.body).to eq(response_body)
+      expect(result.code).to eq(201)
+    end
+  end
+
+  describe "#provider_oauth_redirect" do
+    it "Handle providers OAUTH redirect" do
+      providerId = 'slack'
+      payload = {
+        'environmentId' => '64a865672712f97fb0985298',
+        'code' => '123',
+        'hmacHash' => '$2y$10$U',
+        'integrationIdentifier' => 'integration'
+      }
+      response_body = "object"
+
+      stub_request(:get, "#{base_uri}/subscribers/#{subscriber_id}/credentials/#{providerId}/oauth/callback")
+        .with(query: payload)
+        .to_return(status: 201, body: response_body)
+
+      result = client.provider_oauth_redirect(subscriber_id, providerId, payload)
+
+      expect(result.body).to eq(response_body)
+      expect(result.code).to eq(201)
+    end
+  end
+
+  describe "#chat_oauth" do
+    it "Handle chat OAUTH" do
+      providerId = 'slack'
+      payload = {
+        'environmentId' => '64a865672712f97fb0985298',
+        'hmacHash' => '$2y$10$U.lIU/phf4',
+        'integrationIdentifier' => 'integration'
+      }
+      response_body = "object"
+
+      stub_request(:get, "#{base_uri}/subscribers/#{subscriber_id}/credentials/#{providerId}/oauth")
+        .with(query: payload)
+        .to_return(status: 201, body: response_body)
+
+      result = client.chat_oauth(subscriber_id, providerId, payload)
+
+      expect(result.body).to eq(response_body)
+      expect(result.code).to eq(201)
+    end
+  end
 end
