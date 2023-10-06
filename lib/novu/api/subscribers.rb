@@ -222,6 +222,30 @@ module Novu
         post("/subscribers/#{subscriber_id}/messages/#{message_id}/actions/#{type}")
       end
 
+			# Using this endpoint you can create multiple subscribers at once, to avoid multiple calls to the API.
+      # The bulk API is limited to 500 subscribers per request.
+      #
+      # @bodyparams:
+      # @param `subscribers` [Array[subscriber]]
+      #     @subscriber : subscriber structure
+      #     @param `firstName` [Stringoptional)] The first name of the subscriber.
+      #     @param `lastName` [Stringoptional)] The last name of the subscriber.
+      #     @param `email` [Stringoptional)] The email of the subscriber.
+      #     @param `data` [Hash(optional)] The data object is used to pass additional custom information that could be used to identify the subscriber.
+      #     @param `phone` [Hash(optional)] This phone of the subscriber.
+      #     @param `locale` [String(optional)] The location of the subscriber.
+      #     @param `subscriberId` [String] A unique identifier for the subscriber, usually correlates to the id the user in your systems.
+      #     @param `avatar` [String(optional)] An http url to the profile image of your subscriber
+			#
+      # @return data [Hash]
+      #   - updated [Array] - If the subscriber was updated
+      #   - created [Array] - Array of objects for the subsribers ID created
+      #   - failed [Array] - In case of an error, this field will contain the error message
+      #   
+      # @return [number] status - The status code. Returns 201 if the subscribers were created successfully.
+			def bulk_create_subscribers(body)
+        post("/subscribers/bulk", body: body.to_json, headers: {'Content-Type': 'application/json'})
+			end
       # Marks all the subscriber messages as read, unread, seen or unseen.
       # 
       # @pathparams
