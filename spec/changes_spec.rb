@@ -17,7 +17,7 @@ RSpec.describe Novu::Api::Changes do
         "pageSize": 10,
         "data": [
           {
-            "_id": "63f71b3ef067290fa669106d"
+            "_id": "string"
           }
         ]
       }.to_json
@@ -49,7 +49,7 @@ RSpec.describe Novu::Api::Changes do
   describe "#apply_bulk_changes" do
     it "apply bulk change" do
       payload = {
-        'changeIds' => ['64a865672']
+        'changeIds' => ['string']
       }
 
       response_body = {

@@ -13,7 +13,7 @@ RSpec.describe Novu::Api::Blueprints do
       template_id = "12345"
 
       response_body = {
-        _id: "template_id"
+        _id: "string"
       }.to_json
 
       stub_request(:get, "#{base_uri}/blueprints/#{template_id}")

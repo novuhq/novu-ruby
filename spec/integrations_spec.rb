@@ -33,7 +33,7 @@ RSpec.describe Novu::Api::Integrations do
       }.to_json
 
       response_body = {
-        _id: "63f71b3ef067290fa669106d"
+        _id: "string"
       }.to_json
 
       stub_request(:post, "#{base_uri}/integrations")
@@ -79,7 +79,7 @@ RSpec.describe Novu::Api::Integrations do
 
   describe "#update_integration" do
     it "update the credentials of a integration." do
-      integration_id = "63f71b3ef067290fa669106d"
+      integration_id = "string"
 
       body = {
         active: true,
@@ -148,9 +148,9 @@ RSpec.describe Novu::Api::Integrations do
 
   describe "#set_integration_as_primary" do
     it "sets an integration as primary" do
-      integration_id = "63f71b3ef067290fa669106d"
+      integration_id = "string"
       response_body = {
-        _id: "63f71b3ef067290fa669106d"
+        _id: "string"
       }.to_json
       
       stub_request(:post, "#{base_uri}/integrations/#{integration_id}/set-primary")
