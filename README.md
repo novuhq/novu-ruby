@@ -641,7 +641,7 @@ body = {
 client.update_subscriber_preference('<insert-subscriber-id>', '<insert-template-id>', body)
 ```
 
-- Create bulk subscribers: `create_bulk_subscribers(body)`
+- Create bulk subscribers: `bulk_create_subscribers(body)`
 ```ruby
 payload = {
     'subscribers' => [
@@ -663,7 +663,7 @@ payload = {
         }
     ]
 }
-client.create_bulk_subscribers(payload)
+client.bulk_create_subscribers(payload)
 ```
 
 
