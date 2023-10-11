@@ -1,4 +1,4 @@
-name: Release
+name: Publish new Novu Ruby SDK release to Ruby Gems
 
 on:
   release:
@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Get the release version
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -22,6 +25,8 @@ jobs:
           touch $HOME/.gem/credentials
           chmod 0600 $HOME/.gem/credentials
           printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          sed -i "s/spec.version = \".*\"/spec.version = \"${{ steps.get_version.outputs.VERSION }}\"/g" *.gemspec
+          echo "spec.version variable replaced with '${{ steps.get_version.outputs.VERSION }}'"
           gem build *.gemspec
           gem push *.gem
         env:
