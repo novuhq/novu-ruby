@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    novu (0.1.0)
-      activesupport
-      httparty
+    novu (1.0.0)
+      activesupport (= 6.1.7.2)
+      httparty (~> 0.21)
 
 GEM
   remote: https://rubygems.org/
