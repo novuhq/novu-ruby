@@ -25,8 +25,6 @@ jobs:
           touch $HOME/.gem/credentials
           chmod 0600 $HOME/.gem/credentials
           printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-          sed -i "s/spec.version = \".*\"/spec.version = \"${{ steps.get_version.outputs.VERSION }}\"/g" *.gemspec
-          echo "spec.version variable replaced with '${{ steps.get_version.outputs.VERSION }}'"
           gem build *.gemspec
           gem push *.gem
         env:
