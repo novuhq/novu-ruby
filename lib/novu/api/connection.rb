@@ -3,6 +3,7 @@
 module Novu
   class Api
     module Connection
+
       def get(path, options = {})
         request :get, path, options
       end
@@ -27,6 +28,25 @@ module Novu
 
       def request(http_method, path, options)
         response = self.class.send(http_method, path, options)
+        puts response.code
+        if response.code < 500
+          response
+        elsif @enable_retry
+          @retry_attempts += 1
+
+          puts "retrying requests now....  #{@retry_attempts}"
+    
+          if @retry_attempts < @max_retries
+            @backoff.intervals.each do |interval|
+              sleep(interval)
+              request(http_method, path, options)
+            end
+          else
+            raise StandardError, "Max retry attempts reached"
+          end
+        else
+          response
+        end
       end
     end
   end

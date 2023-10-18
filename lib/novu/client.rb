@@ -42,13 +42,35 @@ module Novu
     base_uri "https://api.novu.co/v1"
     format :json
 
-    def initialize(access_token = nil)
+    attr_accessor :enable_retry, :max_retries, :initial_delay, :max_delay
+
+    def initialize(access_token: nil, enable_retry: false, retry_config: {} )
       raise ArgumentError, "Api Key cannot be blank or nil" if access_token.blank?
 
+      @enable_retry = enable_retry
       @access_token = access_token.to_s.strip
+      @retry_attempts = 0
+
+      retry_config = defaults_retry_config.merge(retry_config)
+      @max_retries = retry_config[:max_retries]
+      @initial_delay = retry_config[:initial_delay]
+      @max_delay = retry_config[:max_delay]
+
       self.class.default_options.merge!(headers: { "Authorization" => "ApiKey #{@access_token}" })
+
+      # Configure the exponential backoff - specifying initial and maximal delays, default is 4s and 60s respectively
+      if @enable_retry
+        @retry_config = retry_config
+        @backoff = ExponentialBackoff.new(@initial_delay, @max_delay)
+      end
     rescue ArgumentError => e
       puts "Error initializing Novu client: #{e.message}"
+    end
+
+    private 
+
+    def defaults_retry_config
+      { max_retries: 3, initial_delay: 4.0, max_delay: 60.0 }
     end
   end
 end
