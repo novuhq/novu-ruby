@@ -37,7 +37,7 @@ To use the library, first initialize the client with your API token:
 ```ruby
 require 'novu'
 
-client = Novu::Client.new('YOUR_NOVU_API_TOKEN')
+client = Novu::Client.new(access_token: 'YOUR_NOVU_API_TOKEN')
 ```
 
 You can then call methods on the client to interact with the Novu API:

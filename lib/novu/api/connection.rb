@@ -27,6 +27,12 @@ module Novu
       private
 
       def request(http_method, path, options)
+
+        if http_method.to_s == 'post' || http_method.to_s == 'patch'
+          self.class.default_options[:headers].merge!({ "Idempotency-Key" => "#{@idempotency_key.to_s.strip}"  }) 
+        end
+
+        # puts self.class.default_options, http_method, http_method.to_s == 'patch'
         response = self.class.send(http_method, path, options)
         puts response.code
         if response.code < 500
