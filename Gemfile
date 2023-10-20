@@ -13,6 +13,7 @@ group :test do
 end
 
 gem "exponential-backoff"
+gem 'mocha'
 gem "rubocop", "~> 1.21"
 gem 'uuid', '~> 2.3', '>= 2.3.9'
 

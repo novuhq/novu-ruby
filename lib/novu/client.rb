@@ -47,10 +47,7 @@ module Novu
     def initialize(access_token: nil, idempotency_key: nil, enable_retry: false, retry_config: {} )
       raise ArgumentError, "Api Key cannot be blank or nil" if access_token.blank?
 
-      # if 
       @idempotency_key = idempotency_key.blank? ? UUID.new.generate : idempotency_key
-
-      puts "idempotency_key #{@idempotency_key}"
 
       @enable_retry = enable_retry
       @access_token = access_token.to_s.strip
@@ -62,7 +59,6 @@ module Novu
       @max_delay = retry_config[:max_delay]
 
       self.class.default_options.merge!(headers: { "Authorization" => "ApiKey #{@access_token}" })
-      # self.class.default_options.merge!(headers: {  })
 
       # Configure the exponential backoff - specifying initial and maximal delays, default is 4s and 60s respectively
       if @enable_retry
