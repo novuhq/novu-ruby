@@ -44,6 +44,13 @@ module Novu
 
     attr_accessor :enable_retry, :max_retries, :initial_delay, :max_delay, :idempotency_key
 
+    # @param `access_token` [String]
+    # @param `idempotency_key` [String]
+    # @param `enable_retry` [Boolean]
+    # @param `retry_config` [Hash]
+    #           - max_retries [Integer]
+    #           - initial_delay [Integer]
+    #           - max_delay [Integer]
     def initialize(access_token: nil, idempotency_key: nil, enable_retry: false, retry_config: {} )
       raise ArgumentError, "Api Key cannot be blank or nil" if access_token.blank?
 
@@ -71,8 +78,12 @@ module Novu
 
     private 
 
+    # @retun [Hash]
+    #   - max_retries [Integer]
+    #   - initial_delay [Integer]
+    #   - max_delay [Integer]
     def defaults_retry_config
-      { max_retries: 3, initial_delay: 4.0, max_delay: 60.0 }
+      { max_retries: 1, initial_delay: 4, max_delay: 60 }
     end
   end
 end

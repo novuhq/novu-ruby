@@ -38,15 +38,14 @@ module Novu
         end
 
         response = self.class.send(http_method, path, options)
-        puts response.code, response.code == 401
+
         if  ! [401, 403, 409, 500, 502, 503, 504].include?(response.code) && ! @enable_retry
           response
         elsif @enable_retry
-          @retry_attempts += 1
-
-          puts "retrying requests now....  #{@retry_attempts}"
     
           if @retry_attempts < @max_retries
+            @retry_attempts += 1
+
             @backoff.intervals.each do |interval|
               sleep(interval)
               request(http_method, path, options)

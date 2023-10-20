@@ -841,6 +841,44 @@ client.delete_topic('<insert-topic-key>')
 client.subscriber_topic('<insert-topic-key>', '<insert-externalSubscriberId>')
 ```
 
+### Idempotent Request
+
+This SDK allows you to perform idempotent requests, that is safely retrying requests without accidentally performing the same operation twice. 
+To achieve this, provide an `idempotency_key` argument during initialization of the NOVU client. We strongly recommend that you use [UUID](https://datatracker.ietf.org/doc/html/rfc4122) format when you're generating your idempotency key. 
+
+```ruby
+client = Novu::Client.new(
+  access_token: '<your-novu-api_key>', 
+  idempotency_key: '<your-idempotency-key>'
+)
+```
+
+### Exponential Retry Mechanism
+
+You can configure this SDK to retry failed requests. This is done by using [Exponential backoff strategy](https://en.wikipedia.org/wiki/Exponential_backoff). It is a common algorithm for retrying requests. The retries gradually extend the waiting time until reaching a specific limit. The concept is to prevent overloading the server with simultaneous requests once it is back online, especially in cases of temporary downtime. 
+
+```ruby
+client = Novu::Client.new(
+  access_token: '<your-novu-api_key>', 
+  idempotency_key: '<your-idempotency-key>',
+  enable_retry: true, # it is disabled by default,
+  retry_config: {
+    max_retries: 3, 
+    initial_delay: 4, 
+    max_delay: 60
+  }
+)
+```
+
+## The retry configuration is explained in the following table:
+| Options       | Detail                                                             | Default Value   |  Data Type |
+| ------------- | -------------------------------------------------------------------| --------------- |  --------- |
+| max_retries   | Specifies total number of retries to perform in case of failure    | 1               |   Integer  |
+| initial_delay | Specifies the minimum time to wait before retrying (in seconds)    | 4               |   Integer  |
+| max_delay     | Specifies the maximum time to wait before retrying (in seconds)    | 60              |   Integer  |
+| enable_retry  | enabling/disable the Exponential Retry mechanism                   | false           |   Boolean  |
+
+
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api-reference).
 
 ## Contributing
