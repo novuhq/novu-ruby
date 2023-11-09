@@ -846,3 +846,12 @@ client.subscriber_topic('<insert-topic-key>', '<insert-externalSubscriberId>')
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/novuhq/novu-ruby
+
+## Support and Feedback
+
+Be sure to visit the Novu official [documentation website](https://docs.novu.co/docs) for additional information about our API.
+If you need additional assistance, join our Discord server [here](https://discord.novu.co).
+
+## License
+
+Novu Kotlin SDK is licensed under the MIT License - see the [LICENSE](https://github.com/novuhq/novu-ruby/blob/main/LICENSE.txt) file for details.
