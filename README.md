@@ -845,7 +845,7 @@ client.subscriber_topic('<insert-topic-key>', '<insert-externalSubscriberId>')
 
 ## Contributing
 
-Bug reports and pull requests are welcomed [here](https://github.com/novuhq/novu-ruby)
+Bug reports and pull requests are welcome [here.](https://github.com/novuhq/novu-ruby)
 
 ## Support and Feedback
 
