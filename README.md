@@ -854,4 +854,4 @@ If you need additional assistance, join our Discord server [here](https://discor
 
 ## License
 
-Novu Kotlin SDK is licensed under the MIT License - see the [LICENSE](https://github.com/novuhq/novu-ruby/blob/main/LICENSE.txt) file for details.
+Novu Ruby SDK is licensed under the MIT License - see the [LICENSE](https://github.com/novuhq/novu-ruby/blob/main/LICENSE.txt) file for details.
