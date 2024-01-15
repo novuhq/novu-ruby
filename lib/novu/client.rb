@@ -14,6 +14,7 @@ require "novu/api/messages"
 require "novu/api/notification_groups"
 require "novu/api/notification_templates"
 require "novu/api/notification"
+require "novu/api/organizations"
 require "novu/api/subscribers"
 require "novu/api/tenants"
 require "novu/api/topics"
@@ -35,6 +36,7 @@ module Novu
     include Novu::Api::NotificationGroups
     include Novu::Api::NotificationTemplates
     include Novu::Api::Notification
+    include Novu::Api::Organizations
     include Novu::Api::Subscribers
     include Novu::Api::Tenants
     include Novu::Api::Topics
