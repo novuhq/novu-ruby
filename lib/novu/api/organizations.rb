@@ -20,7 +20,7 @@ module Novu
         post("/organizations", body: body)
       end
 
-      # Returns a list of organizations
+      # Get all organizations
       #
       # @return [Hash] data - The list of organizations already created.
       # @return [number] status - Returns 200 if successful
