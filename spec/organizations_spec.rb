@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require_relative "./spec/spec_helper"
 require_relative "../lib/novu"
 
 RSpec.describe Novu::Api::Organizations do
