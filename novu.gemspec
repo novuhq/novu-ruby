@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "example-gem", "~> 1.0"
 
   spec.add_dependency "httparty", "~> 0.21"
-  spec.add_dependency "activesupport", "6.1.7.2"
+  spec.add_dependency "activesupport", ">= 6.1.7.2"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
