@@ -21,6 +21,7 @@ GEM
     crack (0.4.5)
       rexml
     diff-lcs (1.5.0)
+    exponential-backoff (0.0.4)
     hashdiff (1.0.1)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
@@ -29,8 +30,12 @@ GEM
       concurrent-ruby (~> 1.0)
     json (2.6.3)
     json (2.6.3-java)
+    macaddr (1.7.2)
+      systemu (~> 2.6.5)
     mini_mime (1.1.2)
     minitest (5.17.0)
+    mocha (2.1.0)
+      ruby2_keywords (>= 0.0.5)
     multi_xml (0.6.0)
     parallel (1.22.1)
     parser (3.2.1.0)
@@ -66,9 +71,13 @@ GEM
     rubocop-ast (1.27.0)
       parser (>= 3.2.1.0)
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.5)
+    systemu (2.6.5)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    uuid (2.3.9)
+      macaddr (~> 1.0)
     webmock (3.18.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -83,10 +92,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  exponential-backoff
+  mocha
   novu!
   rake (~> 13.0)
   rspec
   rubocop (~> 1.21)
+  uuid (~> 2.3, >= 2.3.9)
   webmock
 
 BUNDLED WITH

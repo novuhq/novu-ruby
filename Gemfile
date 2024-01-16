@@ -12,6 +12,9 @@ group :test do
   gem "webmock"
 end
 
+gem "exponential-backoff"
+gem 'mocha'
 gem "rubocop", "~> 1.21"
+gem 'uuid', '~> 2.3', '>= 2.3.9'
 
 # gem 'pry-debugger-jruby'
