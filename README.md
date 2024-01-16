@@ -549,6 +549,61 @@ client.notifications_graph_stats({
 client.notification('<insert-notification-id>')
 ```
 
+### Organizations
+
+- Create an organization: `create_organization(body)`
+
+```ruby
+client.create_organization({
+    'logo' => '<insert-organization-logo>',
+    'name' => '<insert-organization-name>', 
+}) 
+```
+
+- Get all organizations: `organizations()` 
+
+```ruby
+client.organizations() 
+```
+
+- Get current organization: `current_organization()` 
+
+```ruby
+client.current_organization() 
+```
+
+- Get all members of current organization: `current_organization_members()` 
+
+```ruby
+client.current_organization_members() 
+```
+
+- Rename organization: `rename_organization(body)` 
+
+```ruby
+client.rename_organization({
+    name: '<insert-organization-name>'
+}) 
+```
+
+- Rename organization: `organization_branding(body)` 
+
+```ruby
+client.organization_branding({
+    logo: '<insert-organization-logo>',
+    color: '<insert-organization-color>',
+    fontColor: '<insert-organization-fontColor>',
+    contentBackground: '<insert-organization-contentBackground>',
+    fontFamily: '<insert-organization-fontFamily>'
+}) 
+```
+
+- Delete member from organization: `delete_organization_member(member_id)` 
+
+```ruby
+client.delete_organization_member('<insert-member-id>')
+```
+
 ### Subscribers
 
 - Get subscribers: `subscribers(query = {}) `
