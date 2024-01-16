@@ -5,7 +5,7 @@ require_relative "../lib/novu"
 
 RSpec.describe Novu::Api::Tenants do
   let(:access_token) { "1234567890" }
-  let(:client) { Novu::Client.new(access_token) }
+  let(:client) { Novu::Client.new(access_token: access_token) }
   let(:base_uri) { "https://api.novu.co/v1" }
   let(:identifier) { "a_unique_string" }
 
