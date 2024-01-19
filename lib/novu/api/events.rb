@@ -50,7 +50,7 @@ module Novu
       #   - transactionId [String(optional)] - Transaction id for trigger
       # @return [number] status - The status code. Returns 201 if the event has been successfully triggered.
       def trigger_bulk_event(body)
-        post("/events/trigger/bulk", body: body)
+        post("/events/trigger/bulk", body: body.to_json, headers: {'Content-Type': 'application/json'})
       end
 
       # Trigger a broadcast event to all existing subscribers, could be used to send announcements, etc.

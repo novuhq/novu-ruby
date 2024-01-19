@@ -51,7 +51,7 @@ RSpec.describe Novu::Api::Events do
             to: { email: "user2@example.com" }
           }
         ]
-      }.to_json
+      }
 
       response_body = {
         acknowledged: true,
