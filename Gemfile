@@ -8,13 +8,13 @@ gemspec
 gem "rake", "~> 13.0"
 
 group :test do
-  gem 'rspec'
+  gem "rspec"
   gem "webmock"
 end
 
 gem "exponential-backoff"
-gem 'mocha'
+gem "mocha"
 gem "rubocop", "~> 1.21"
-gem 'uuid', '~> 2.3', '>= 2.3.9'
+gem "uuid", "~> 2.3", ">= 2.3.9"
 
 # gem 'pry-debugger-jruby'
