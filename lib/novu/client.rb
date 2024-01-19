@@ -18,6 +18,7 @@ require "novu/api/organizations"
 require "novu/api/subscribers"
 require "novu/api/tenants"
 require "novu/api/topics"
+require_relative "version"
 
 module Novu
   class Client
@@ -67,7 +68,11 @@ module Novu
       @initial_delay = retry_config[:initial_delay]
       @max_delay = retry_config[:max_delay]
 
-      self.class.default_options.merge!(headers: { "Authorization" => "ApiKey #{@access_token}" })
+      self.class.default_options.merge!(headers: { 
+					"Authorization" => "ApiKey #{@access_token}",
+					"User-Agent" => "novu/ruby/#{Novu::VERSION}" 
+				}
+			)
 
       # Configure the exponential backoff - specifying initial and maximal delays, default is 4s and 60s respectively
       if @enable_retry
