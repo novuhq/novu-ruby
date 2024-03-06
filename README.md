@@ -934,6 +934,17 @@ client = Novu::Client.new(
 | enable_retry  | enabling/disable the Exponential Retry mechanism                   | false           |   Boolean  |
 
 
+### Custom backend URL
+
+To use a custom backend URL, for example to be able to use the EU Novu API, you can pass a custom `backend_url` when initializing the client.
+
+```ruby
+client = Novu::Client.new(
+  access_token: '<your-novu-api_key>', 
+  backend_url: 'https://eu.api.novu.co/v1'
+)
+```
+
 ### For more information about these methods and their parameters, see the [API documentation](https://docs.novu.co/api-reference).
 
 ## Contributing

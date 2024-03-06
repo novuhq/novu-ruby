@@ -42,7 +42,6 @@ module Novu
     include Novu::Api::Tenants
     include Novu::Api::Topics
 
-    base_uri "https://api.novu.co/v1"
     format :json
 
     attr_accessor :enable_retry, :max_retries, :initial_delay, :max_delay, :idempotency_key
@@ -54,7 +53,7 @@ module Novu
     #           - max_retries [Integer]
     #           - initial_delay [Integer]
     #           - max_delay [Integer]
-    def initialize(access_token: nil, idempotency_key: nil, enable_retry: false, retry_config: {} )
+    def initialize(access_token: nil, idempotency_key: nil, enable_retry: false, retry_config: {}, backend_url: "https://api.novu.co/v1")
       raise ArgumentError, "Api Key cannot be blank or nil" if access_token.blank?
 
       @idempotency_key = idempotency_key.blank? ? UUID.new.generate : idempotency_key
@@ -67,6 +66,8 @@ module Novu
       @max_retries = retry_config[:max_retries]
       @initial_delay = retry_config[:initial_delay]
       @max_delay = retry_config[:max_delay]
+
+      self.base_uri = backend_url
 
       self.class.default_options.merge!(headers: { 
 					"Authorization" => "ApiKey #{@access_token}",
