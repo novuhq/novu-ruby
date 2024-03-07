@@ -67,7 +67,7 @@ module Novu
       @initial_delay = retry_config[:initial_delay]
       @max_delay = retry_config[:max_delay]
 
-      self.base_uri = backend_url
+      self.class.base_uri(backend_url)
 
       self.class.default_options.merge!(headers: { 
 					"Authorization" => "ApiKey #{@access_token}",
