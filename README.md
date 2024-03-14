@@ -896,6 +896,73 @@ client.delete_topic('<insert-topic-key>')
 client.subscriber_topic('<insert-topic-key>', '<insert-externalSubscriberId>')
 ```
 
+### Workflow Overrides
+
+- Create workflow overrides: `create_workflow_overrides(body)`
+```ruby
+client.create_workflow_overrides(
+    tenantId: "<insert-tenant-id>", 
+    workflowId: "<insert-workflow-id>",
+    active: true # or false
+)
+```
+
+- Get workflow overrides: `get_workflow_overrides(query = {})`
+```ruby
+client.get_workflow_overrides(
+    limit: 1,
+    page: 1
+)
+```
+
+- Get tenant workflow overrides: `get_tenant_workflow_override(workflow_id, tenant_id)`
+```ruby
+client.get_tenant_workflow_override("<insert-workflow-id>", "<insert-tenant-id>")
+```
+
+- Get workflow override by ID: `get_workflow_override_by_id(override_id)`
+```ruby
+client.get_workflow_override_by_id("<insert-override-id>")
+```
+
+- Update workflow override by ID: `update_workflow_override_by_id(override_id, body)`
+```ruby
+client.update_workflow_override_by_id(
+    "<insert-tenant-id>", 
+    {
+        preferenceSettings: {
+            sms: true, # or false,
+            in_app: true, # or false,
+            email: true, # or false,
+            push: true, # or false,
+        },
+        active: true # or false
+    }
+)
+```
+
+- Update tenant workflow override: `update_tenant_workflow_override(workflow_id, tenant_id, body)`
+```ruby
+client.update_tenant_workflow_override(
+    "<insert-workflow-id>"
+    "<insert-tenant-id>", 
+    {
+        preferenceSettings: {
+            sms: true, # or false,
+            in_app: true, # or false,
+            email: true, # or false,
+            push: true, # or false,
+        },
+        active: true # or false
+    }
+)
+```
+
+- Delete workflow override: `delete_workflow_override(override_id)`
+```ruby
+client.delete_workflow_override("<insert-override-id>")
+```
+
 ### Idempotent Request
 
 This SDK allows you to perform idempotent requests, that is safely retrying requests without accidentally performing the same operation twice. 

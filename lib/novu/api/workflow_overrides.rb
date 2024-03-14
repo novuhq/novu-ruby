@@ -62,7 +62,7 @@ module Novu
 				get("/workflow-overrides/#{override_id}")
 			end
 
-			# Update tenant workflow ovverride by it's ID
+			# Update workflow ovverride by it's ID
       #
       # @pathparams:
       # @param `override_id` [String]
@@ -76,6 +76,23 @@ module Novu
       #  - Returns 200 if successful.
 			def update_workflow_override_by_id(override_id, body)
 				put("/workflow-overrides/#{override_id}", body: body.to_json, headers: {'Content-Type': 'application/json'})
+			end
+
+			# Update tenant workflow ovverride
+      #
+      # @pathparams:
+      # @param `workflow_id` [String]
+      # @param `tenant_id` [String]
+			#
+			# @bodyParam:
+			# @param `active` [Boolean] - The status of the workflow.
+      # @param `preferenceSettings` [Hash] - The preference settings of the workflow. It should include any/all of following keys: chat, email, sms, in_app, push.
+      #
+      # @return [Hash] workflow override entity
+      # @return [number] status
+      #  - Returns 200 if successful.
+			def update_tenant_workflow_override(workflow_id, tenant_id, body)
+				put("/workflow-overrides/workflows/#{workflow_id}/tenants/#{tenant_id}", body: body.to_json, headers: {'Content-Type': 'application/json'})
 			end
  			
 			# Delete a workflow override by it's ID.

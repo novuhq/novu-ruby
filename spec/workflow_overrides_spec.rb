@@ -8,6 +8,8 @@ RSpec.describe Novu::Api::WorkflowOverrides do
   let(:client) { Novu::Client.new(access_token: access_token) }
   let(:base_uri) { "https://api.novu.co/v1" }
   let(:override_id) { "985277" }
+	let(:workflow_id) { "3f71b3ef067" }
+	let(:tenant_id) { "ecaf52336" }
 
   describe "#create_workflow_overrides" do
     it "creates a workflow override" do
@@ -76,9 +78,6 @@ RSpec.describe Novu::Api::WorkflowOverrides do
 
   describe "#get_tenant_workflow_override" do
     it "get tenant workflow overrides" do
-      workflow_id = "63f71b3ef067"
-      tenant_id = "ecaf52336"
-
       stub_request(:get, "#{base_uri}/workflow-overrides/workflows/#{workflow_id}/tenants/#{tenant_id}")
         .to_return(status: 200)
 
@@ -109,6 +108,21 @@ RSpec.describe Novu::Api::WorkflowOverrides do
         .to_return(status: 200)
 
       result = client.update_workflow_override_by_id(override_id, body)
+      expect(result.code).to eq(200)
+    end
+  end
+
+	describe "#update_tenant_workflow_override" do
+    it "update workflow override details" do
+      body = {
+        active: true
+      }
+
+      stub_request(:put, "#{base_uri}/workflow-overrides/workflows/#{workflow_id}/tenants/#{tenant_id}")
+        .with(body: body)
+        .to_return(status: 200)
+
+      result = client.update_tenant_workflow_override(workflow_id, tenant_id, body)
       expect(result.code).to eq(200)
     end
   end
