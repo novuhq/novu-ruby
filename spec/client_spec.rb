@@ -22,7 +22,7 @@ RSpec.describe Novu::Client do
 
   let(:max_retries) { 3 }
   let(:success_response) { TestResponse.new(code: 201, body: response_body) }
-  let(:failure_response) { TestResponse.new(code: 401, body: response_body) }
+  let(:failure_response) { TestResponse.new(code: 500, body: response_body) }
 
   context "with exponential retry enabled" do
     let(:client) {
@@ -66,7 +66,7 @@ RSpec.describe Novu::Client do
       allow(Novu::Client).to receive(:post).exactly(1).and_return(failure_response)
 
       result = client.create_subscriber(body)
-      expect(result[:status]).to eq(401)
+      expect(result[:status]).to eq(500)
     end
 
     it "performs idempotent request with no duplicate result" do

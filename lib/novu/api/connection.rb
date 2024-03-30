@@ -40,7 +40,7 @@ module Novu
 
         response = self.class.send(http_method, path, options)
 
-        if  ! [401, 403, 409, 500, 502, 503, 504].include?(response.code) || ! @enable_retry
+        if ! [500, 502, 503, 504].include?(response.code) || ! @enable_retry
           response
         else
           sleep(@backoff.interval_at(retry_number))
