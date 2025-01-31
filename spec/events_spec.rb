@@ -14,7 +14,7 @@ RSpec.describe Novu::Api::Events do
         name: "welcome",
         payload: { message: "Hello, world!" },
         to: { email: "user@example.com" }
-      }.to_json
+      }
 
       response_body = {
         acknowledged: true,
@@ -77,7 +77,7 @@ RSpec.describe Novu::Api::Events do
       body = {
         name: "announcement",
         payload: { message: "Important announcement!" }
-      }.to_json
+      }
 
       response_body = {
         acknowledged: true,

@@ -27,7 +27,7 @@ module Novu
       #   - transactionId [String(optional)] - Transaction id for trigger
       # @return [number] status - The status code. Returns 201 if the event has been successfully triggered.
       def trigger_event(body)
-        post("/events/trigger", body: body)
+        post("/events/trigger", body: body.to_json, headers: {'Content-Type': 'application/json'})
       end
 
       # Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
@@ -70,7 +70,7 @@ module Novu
       #   - transactionId [String(optional)] - Transaction id for trigger
       # @return [number] status - The status code. Returns 201 if the event has been successfully broadcast to all existing subscribers.
       def broadcast_event(body)
-        post("/events/trigger/broadcast", body: body)
+        post("/events/trigger/broadcast", body: body.to_json, headers: {'Content-Type': 'application/json'})
       end
 
       # Using a previously generated transactionId during the event trigger, will cancel any active or pending workflows.
