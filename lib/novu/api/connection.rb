@@ -31,7 +31,8 @@ module Novu
       # It applies exponential backoff strategy (if enabled) for failed requests. 
       # It also performs an idempotent request to safely retry requests without having duplication operations.
       #
-      def request(http_method, path, options)
+      def request(http_method, path, options, retry_number: 0)
+        raise StandardError, "Max retry attempts reached" if retry_number >= @max_retries
 
         if http_method.to_s == 'post' || http_method.to_s == 'patch'
           self.class.default_options[:headers].merge!({ "Idempotency-Key" => "#{@idempotency_key.to_s.strip}"  }) 
@@ -39,22 +40,11 @@ module Novu
 
         response = self.class.send(http_method, path, options)
 
-        if  ! [401, 403, 409, 500, 502, 503, 504].include?(response.code) && ! @enable_retry
+        if ! [500, 502, 503, 504].include?(response.code) || ! @enable_retry
           response
-        elsif @enable_retry
-    
-          if @retry_attempts < @max_retries
-            @retry_attempts += 1
-
-            @backoff.intervals.each do |interval|
-              sleep(interval)
-              request(http_method, path, options)
-            end
-          else
-            raise StandardError, "Max retry attempts reached"
-          end
         else
-          response
+          sleep(@backoff.interval_at(retry_number))
+          request(http_method, path, options, retry_number: retry_number + 1)
         end
       end
     end
