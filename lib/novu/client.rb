@@ -18,6 +18,7 @@ require "novu/api/organizations"
 require "novu/api/subscribers"
 require "novu/api/tenants"
 require "novu/api/topics"
+require "novu/api/workflow_overrides"
 require_relative "version"
 
 module Novu
@@ -41,6 +42,7 @@ module Novu
     include Novu::Api::Subscribers
     include Novu::Api::Tenants
     include Novu::Api::Topics
+    include Novu::Api::WorkflowOverrides
 
     format :json
 
@@ -71,7 +73,7 @@ module Novu
 
       self.class.default_options.merge!(headers: { 
 					"Authorization" => "ApiKey #{@access_token}",
-					"User-Agent" => "novu/ruby/#{Novu::VERSION}" 
+					"User-Agent" => "novu/ruby/#{Novu::VERSION}"
 				}
 			)
 
